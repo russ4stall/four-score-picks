@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="default" extends="struts-default" namespace="/">
+        <interceptors>
+            <interceptor name="loginCheckInterceptor" class="com.github.russ4stall.fourscorepicks.interceptor.LoginCheckInterceptor">
+            </interceptor>
+            <interceptor-stack name="newStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="loginCheckInterceptor"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <global-results>
+            <result name="login" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">login</param>
+            </result>
+           </global-results>
+
+        <action name="standings" class="com.github.russ4stall.fourscorepicks.StandingsAction" method="input">
+            <interceptor-ref name="newStack"/>
+            <result name="input">/WEB-INF/jsp/standings.jsp</result>
+        </action>
+
+        <action name="mypicks" class="com.github.russ4stall.fourscorepicks.pick.MyPicksAction" method="input">
+            <interceptor-ref name="newStack"/>
+            <result name="input">/WEB-INF/jsp/mypicks.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">mypicks</param>
+            </result>
+        </action>
+
+        <action name="admin" class="com.github.russ4stall.fourscorepicks.AdminAction" method="input">
+            <interceptor-ref name="newStack"/>
+            <result name="input">/WEB-INF/jsp/admin.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">admin</param>
+            </result>
+            <result name="redirectHome" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">home</param>
+            </result>
+        </action>
+
+
+        <action name="logout" class="com.github.russ4stall.fourscorepicks.user.action.LogoutAction">
+            <interceptor-ref name="newStack"/>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">login</param>
+            </result>
+        </action>
+
+        <action name="home" class="com.github.russ4stall.fourscorepicks.HomeAction" method="input">
+            <interceptor-ref name="newStack"/>
+            <result name="success">/WEB-INF/jsp/home.jsp</result>
+        </action>
+
+        <action name="register" class="com.github.russ4stall.fourscorepicks.user.action.RegisterAction" method="input">
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">/WEB-INF/jsp/register.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">home</param>
+            </result>
+        </action>
+
+        <action name="login" class="com.github.russ4stall.fourscorepicks.user.action.LoginAction" method="input">
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">/WEB-INF/jsp/login.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">home</param>
+            </result>
+        </action>
+
+
+    </package>
+</struts>
