@@ -18,6 +18,7 @@ public class WeekCalcTest {
     public static void main(String[] args) {
 
         List<DateTime> timeToTestList = ImmutableList.of(
+                new DateTime(2013, 8, 7, 0,0,0,0),
                 new DateTime(2013, 9, 5, 0,0,0,0),
                 new DateTime(2013, 9, 9, 0,0,0,0),
                 new DateTime(2013, 9, 11, 0,0,0,0),

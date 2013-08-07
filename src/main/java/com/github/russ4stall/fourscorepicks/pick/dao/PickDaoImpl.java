@@ -93,10 +93,11 @@ public class PickDaoImpl implements PickDao {
                     "FROM pick p " +
                     "JOIN game g ON g.id=p.game_id " +
                     "JOIN team t ON t.id=p.pick " +
-                    "WHERE week=? " +
+                    "WHERE week=? AND p.user_id=? " +
                     "ORDER BY g.date_time, p.game_id ASC");
 
             preparedStatement.setInt(1, weekNum);
+            preparedStatement.setInt(2, userId);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){
@@ -112,8 +113,9 @@ public class PickDaoImpl implements PickDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            SqlUtilities.closePreparedStatement(preparedStatement);
             SqlUtilities.closeResultSet(resultSet);
+            SqlUtilities.closePreparedStatement(preparedStatement);
+
             SqlUtilities.closeConnection(connection);
         }
 

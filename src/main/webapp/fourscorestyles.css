@@ -136,8 +136,20 @@ body {
     border-radius: 10px;
 }
 
+#news_block a{
+    display: block;
+    float: right;
+    color: blue;
+    text-decoration: underline;
+}
+
+#news_block a:hover {
+    color: darkblue;
+    text-decoration: none;
+}
+
 .news_date{
-    /*float:right;*/
+
     font-size:12px;
     margin-bottom: 10px;
     color: darkblue;

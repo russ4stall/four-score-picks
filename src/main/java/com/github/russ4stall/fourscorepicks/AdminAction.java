@@ -61,6 +61,8 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
         return "redirectHome";
     }
 
+
+
     public String addGame(){
         String dateTime = getGameDay() + " " + getGameTime();
         gameDao.addGame(getAwayTeamId(), getHomeTeamId(), getWeekNumNewGame(), dateTime);
@@ -162,4 +164,6 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
     public int getWeekNumNewGame() {
         return weekNumNewGame;
     }
+
+
 }

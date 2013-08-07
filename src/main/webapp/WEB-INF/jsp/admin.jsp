@@ -10,7 +10,7 @@
     <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
     <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
-    <title>FourScorePicks</title>
+    <title>ADMIN</title>
 </head>
 <body>
 <div id="banner">FOUR SCORE PICKS</div>

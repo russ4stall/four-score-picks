@@ -11,6 +11,15 @@ import java.sql.Timestamp;
 public class News {
     private String newsText;
     private Timestamp datePosted;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNewsText() {
         return newsText;

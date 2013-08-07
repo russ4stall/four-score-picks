@@ -30,9 +30,42 @@ public class ContentDaoImpl implements ContentDao {
             String query = "INSERT INTO news (news, user_id, date_posted) " +
                     "VALUES (?, ?, now())";
 
+
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, news);
             preparedStatement.setInt(2, user.getId());
+
+            preparedStatement.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }
+
+    }
+
+
+    @Override
+    public void editNews(int id, String newsText) {
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+
+            String query = "UPDATE news " +
+                    "SET news=?" +
+                    "WHERE id=?";
+
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newsText);
+            preparedStatement.setInt(2, id);
 
             preparedStatement.executeUpdate();
 
@@ -65,7 +98,7 @@ public class ContentDaoImpl implements ContentDao {
                 News news = new News();
                 news.setDatePosted(resultSet.getTimestamp("date_posted"));
                 news.setNewsText(resultSet.getString("news"));
-
+                news.setId(resultSet.getInt("id"));
                 newsList.add(news);
             }
 
@@ -85,8 +118,60 @@ public class ContentDaoImpl implements ContentDao {
     }
 
     @Override
+    public News getNewsById(int id) {
+        News news = new News();
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            preparedStatement = connection.prepareStatement("SELECT * FROM news WHERE id=?");
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            news.setDatePosted(resultSet.getTimestamp("date_posted"));
+            news.setNewsText(resultSet.getString("news"));
+            news.setId(resultSet.getInt("id"));
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeResultSet(resultSet);
+            SqlUtilities.closeConnection(connection);
+        }
+
+
+
+        return news;
+    }
+
+    @Override
     public void deleteNews(int id) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            String query = "DELETE FROM news WHERE id=?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }
     }
 
     @Override

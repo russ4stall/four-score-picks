@@ -21,7 +21,13 @@
     <div id="news_block">
 
         <div class="news_date"><fmt:formatDate value="${news.datePosted}" type="both" pattern="EEEEEE MMMMMMMMM dd, yyyy"/></div>
+        <c:if test="${sessionScope.user.admin}">
+            <a href="editNews?newsId=${news.id}">edit</a>
+        </c:if>
+
         ${news.newsText}
+
+
     </div>
 
     </c:forEach>

@@ -16,6 +16,10 @@ public interface ContentDao {
 
     void deleteNews(int id);
 
+    void editNews(int id, String newsText);
+
+    News getNewsById(int id);
+
     List<News> getNewsList();
 
     void addComment(String comment, User user);
