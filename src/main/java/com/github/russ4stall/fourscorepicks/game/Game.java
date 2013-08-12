@@ -42,7 +42,7 @@ public class Game {
     }
 
     public Team getWinningTeam() {
-       /* if (homeTeamScore > awayTeamScore){
+      /*  if (homeTeamScore > awayTeamScore){
             winningTeam = homeTeam;
         } else if (awayTeamScore > homeTeamScore){
             winningTeam = awayTeam;

@@ -61,7 +61,7 @@
             </result>
         </action>
 
-        <action name="admin" class="com.github.russ4stall.fourscorepicks.AdminAction" method="input">
+        <action name="admin" class="com.github.russ4stall.fourscorepicks.admin.AdminAction" method="input">
             <interceptor-ref name="newStack"/>
             <result name="input">/WEB-INF/jsp/admin.jsp</result>
             <result name="success" type="redirectAction">
@@ -81,6 +81,15 @@
             <result name="redirectHome" type="redirectAction">
                 <param name="namespace">/</param>
                 <param name="actionName">home</param>
+            </result>
+        </action>
+
+        <action name="editSchedule" class="com.github.russ4stall.fourscorepicks.admin.EditScheduleAction" method="input">
+            <interceptor-ref name="newStack"/>
+            <result name="input">/WEB-INF/jsp/editschedule.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">editSchedule</param>
             </result>
         </action>
 

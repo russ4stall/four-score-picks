@@ -19,11 +19,11 @@
     <b>Log In</b>
     <br><br>
 <s:form action="login!execute" method="post">
-    <s:textfield key="email" label="Email Address"/>
+    <s:textfield key="email" type="email" label="Email Address"/>
     <s:password key="password" label="Password"/>
     <s:submit value="Login"/>
 </s:form>
-   Don't have an account? <a href="/register">Sign Up</a>
+   Don't have an account? <a style="color: blue; border-bottom: 1px dotted blue;" href="/register">Sign Up</a>
 </div>
 </body>
 </html>

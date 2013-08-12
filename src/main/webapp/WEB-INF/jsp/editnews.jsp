@@ -22,20 +22,21 @@
     <div id="news_tool">
         <span class="tool_title" style="color: white">Edit</span>
 
+                <a title="Delete this post"
+                   href="editNews!deleteNews?newsId=${news.id}">
+                    delete
+                </a>
+
         <br><br>
+
         <form action="editNews!editNews" method="post">
-        <input type="hidden" name="newsId" value="${news.id}">
+            <input type="hidden" name="newsId" value="${news.id}">
             <textarea name="newsText" cols="74" rows="10">
-            ${news.newsText}
+                ${news.newsText}
             </textarea>
             <br>
             <input type="submit" value="Update">
-            <span style="color: white;">
-                or
-                <a style="text-decoration:underline" href="editNews!deleteNews?newsId=${news.id}">
-                    delete
-                </a>
-            </span>
+
 
         </form>
 

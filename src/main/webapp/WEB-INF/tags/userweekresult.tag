@@ -1,18 +1,19 @@
+<%--@elvariable id="action" type="com.github.russ4stall.fourscorepicks.pick.MyPicksAction"--%>
 <%@ tag body-content="empty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ attribute name="userResultList" required="true" type="java.util.ArrayList" %>
 
 
 
 
-<div id="make_your_picks_tool">
+<div id="user_week_result_tool">
     <span class="tool_title">Week ${userResultList[0].game.week} Results</span><br>
     <br>
-    <div id="user_week_result_score">
-         Your score for week ${userResultList[0].game.week}
-        <div>${sessionScope.user.weekScore}</div>
-    </div>
+
+    <c:set var="pointsPossible" value="0"/>
+    <c:set var="userScore" value="0"/>
+
     <table>
         <tr>
             <th>Away</th>
@@ -20,8 +21,17 @@
             <th>&nbsp</th>
             <th>Your Picks</th>
         </tr>
-        <c:set var="counter" value="0"/>
+
         <c:forEach items="${userResultList}" var="gameAndPick">
+            <c:choose>
+                <c:when test="${gameAndPick.game.hotGame}">
+                    <c:set var="pointsPossible" value="${pointsPossible+2}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="pointsPossible" value="${pointsPossible+1}"/>
+                </c:otherwise>
+            </c:choose>
+
             <tr>
                 <c:choose>
                     <c:when test="${gameAndPick.game.awayTeam.id == gameAndPick.game.winningTeam.id}">
@@ -48,6 +58,7 @@
                     <c:choose>
                         <c:when test="${gameAndPick.pick.pickTeamName == null && gameAndPick.game.hotGame}">
                             <span style="color: orangered">FREE POINT</span> <sup>+1</sup>
+                            <c:set var="userScore" value="${userScore+1}"/>
                         </c:when>
                         <c:when test="${gameAndPick.pick.pickTeamName == null}">
                             <span style="color: #FFA6A6; font-style: italic">none</span>
@@ -56,6 +67,7 @@
                             <c:choose>
                                 <c:when test="${gameAndPick.pick.pickTeamId == gameAndPick.game.winningTeam.id}">
                                     <span style="color: lightgreen">${gameAndPick.pick.pickTeamName}</span> <sup>+2</sup>
+                                    <c:set var="userScore" value="${userScore+2}"/>
                                 </c:when>
                                 <c:otherwise>
                                     <span style="color: #FFA6A6">${gameAndPick.pick.pickTeamName}</span>
@@ -66,6 +78,7 @@
                             <c:choose>
                                 <c:when test="${gameAndPick.pick.pickTeamId == gameAndPick.game.winningTeam.id}">
                                     <span style="color: lightgreen">${gameAndPick.pick.pickTeamName}</span> <sup>+1</sup>
+                                    <c:set var="userScore" value="${userScore+1}"/>
                                 </c:when>
                                 <c:otherwise>
                                     <span style="color: #FFA6A6">${gameAndPick.pick.pickTeamName}</span>
@@ -76,7 +89,16 @@
             </tr>
         </c:forEach>
     </table>
-
-
+    <c:if test="${userScore >= pointsPossible}">
+        <div id="all_right">
+            <c:set var="userScore" value="${userScore + 5}"/>
+            <div>You got them all right! +5</div>
+        </div>
+    </c:if>
+    <div id="user_week_result_score">
+        Your score for week ${userResultList[0].game.week}
+                <div>${userScore}</div>
+    </div>
 
 </div>
+

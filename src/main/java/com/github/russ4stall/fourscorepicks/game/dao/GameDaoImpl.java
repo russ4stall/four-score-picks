@@ -48,6 +48,30 @@ public class GameDaoImpl implements GameDao {
         }
     }
 
+
+    @Override
+    public void removeGame(int gameId) {
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            String query = "DELETE FROM game WHERE id=?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, gameId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }
+    }
+
+
     @Override
     public List<Game> getGamesByWeek(int weekNum) {
         SqlUtilities.jbdcUtil();
@@ -103,14 +127,81 @@ public class GameDaoImpl implements GameDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            SqlUtilities.closePreparedStatement(preparedStatement);
             SqlUtilities.closeResultSet(resultSet);
+            SqlUtilities.closePreparedStatement(preparedStatement);
             SqlUtilities.closeConnection(connection);
         }
 
 
         return gameList;
     }
+
+
+    @Override
+    public List<Game> getAllGames() {
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Game> gameList = new ArrayList<Game>();
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            preparedStatement = connection.prepareStatement("SELECT g.*, hg.game_id AS hot_game, " +
+                    "t1.name AS `away_team`, t2.name AS `home_team`, r.*, t3.name AS `winner_name` " +
+                    "FROM game g " +
+                    "LEFT OUTER JOIN result r ON r.game_id=g.id " +
+                    "JOIN team t1 ON t1.id=g.away_team " +
+                    "JOIN team t2 ON t2.id=g.home_team " +
+                    "LEFT OUTER JOIN team t3 ON t3.id=r.winner_id " +
+                    "LEFT OUTER JOIN hot_game hg ON hg.game_id=g.id " +
+                    "ORDER BY g.date_time, g.id ASC");
+
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Game game = new Game();
+                Team awayTeam = new Team();
+                Team homeTeam = new Team();
+                Team winningTeam = new Team();
+
+                awayTeam.setName(resultSet.getString("t1.away_team"));
+                awayTeam.setId(resultSet.getInt("g.away_team"));
+                homeTeam.setName(resultSet.getString("t2.home_team"));
+                homeTeam.setId(resultSet.getInt("g.home_team"));
+                winningTeam.setId(resultSet.getInt("winner_id"));
+                winningTeam.setName(resultSet.getString("winner_name"));
+                game.setAwayTeamScore(resultSet.getInt("away_team_score"));
+                game.setHomeTeamScore(resultSet.getInt("home_team_score"));
+                game.setAwayTeam(awayTeam);
+                game.setHomeTeam(homeTeam);
+                game.setWinningTeam(winningTeam);
+                game.setId(resultSet.getInt("g.id"));
+                game.setWeek(resultSet.getInt("week"));
+                game.setGameTime(resultSet.getTimestamp("g.date_time"));
+                resultSet.getInt("hot_game");
+                if(!resultSet.wasNull()){
+                    game.setHotGame(true);
+                }
+
+                gameList.add(game);
+            }
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closeResultSet(resultSet);
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }
+
+
+        return gameList;
+    }
+
 
     @Override
     public void addHotGame(int weekNum, int gameId) {
@@ -161,8 +252,36 @@ public class GameDaoImpl implements GameDao {
 
     @Override
     public void setResult(Game game) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            String query = "INSERT INTO result (game_id, winner_id, home_team_score, away_team_score) " +
+                    "VALUES (?, ?, ?, ?) " +
+                    "ON DUPLICATE KEY UPDATE winner_id=?, home_team_score=?, away_team_score=?";
+
+
+
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, game.getId());
+            preparedStatement.setInt(2, game.getWinningTeam().getId());
+            preparedStatement.setInt(3, game.getHomeTeamScore());
+            preparedStatement.setInt(4, game.getAwayTeamScore());
+            preparedStatement.setInt(5, game.getWinningTeam().getId());
+            preparedStatement.setInt(6, game.getHomeTeamScore());
+            preparedStatement.setInt(7, game.getAwayTeamScore());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }    }
 
 
 }

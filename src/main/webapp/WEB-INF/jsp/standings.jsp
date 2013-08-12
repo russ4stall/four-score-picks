@@ -47,7 +47,7 @@
 
             </div>
             <div id="standings_tool">
-                <span class="tool_title">Week</span><br>
+                <span class="tool_title">Week ${weekNum}</span><br>
                 <br>
 
                 <c:set var="rank" value="1"/>

@@ -17,14 +17,9 @@
     <h1>My Picks</h1>
 
     <div id="work_bench">
-
-
-
         <div id="make_your_picks_tool">
-
             <span class="tool_title">Make Your Picks for Week ${action.gameAndPickList[0].game.week}</span><br>
             <br>
-
             <div id="make_your_picks_instructions">
                 <ul>
                     <li>
@@ -41,6 +36,9 @@
                     </li>
                     <li>
                         Once a game has started, you will no longer be able to alter your picks.
+                    </li>
+                    <li>
+                        You must make at least one pick to receive the Hot Game free point.
                     </li>
                 </ul>
 
@@ -124,8 +122,10 @@
 
 <h1>My Results</h1>
 
-        <fsp:userweekresult  userResultList="${action.userResultList}"/>
+        <c:forEach items="${action.weekUserResultList}" var="resultList">
 
+            <fsp:userweekresult  userResultList="${resultList}"/>
+        </c:forEach>
     </div>
 
 </div>

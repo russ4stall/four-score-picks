@@ -32,6 +32,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 public class MyPicksAction extends ActionSupport implements SessionAware, Preparable {
     private List<Game> gameList;
     private List<GameAndPick> userResultList;
+    private List<List> weekUserResultList;
     private List<GameAndPick> gameAndPickList;
     private GameDao gameDao = new GameDaoImpl();
     private PickDao pickDao = new PickDaoImpl();
@@ -45,14 +46,17 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
 
     @Override
     public void prepare() throws Exception {
+        weekUserResultList = new ArrayList<List>();
         RosterFactory rosterFactory = new RosterFactory();
         rosterFactory.calculateScores();
         seasonRoster = rosterFactory.getSeasonRoster();
         user = (User) session.get("user");
         gameList = gameDao.getGamesByWeek(weekCalculator.getWeekOfSeason());
-        userResultList = pickDao.getGameAndPickByWeek(user.getId(), weekCalculator.getPreviousWeekOfSeason());
+        for (int i=weekCalculator.getPreviousWeekOfSeason(); i >= 1; i--){
+            userResultList = pickDao.getGameAndPickByWeek(user.getId(), i);
+            weekUserResultList.add(userResultList);
+        }
         gameAndPickList = pickDao.getGameAndPickByWeek(user.getId(), weekCalculator.getWeekOfSeason());
-
     }
 
     public String input() {
@@ -136,5 +140,9 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
 
     public void setUserResultList(List<GameAndPick> userResultList) {
         this.userResultList = userResultList;
+    }
+
+    public List getWeekUserResultList() {
+        return weekUserResultList;
     }
 }

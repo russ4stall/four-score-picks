@@ -32,7 +32,7 @@ public class WeekCalculator {
         //DateTime startOfSeasonDate = new DateTime(2013, 8, 27, 0, 0, 0, 0);
 
         //rf: this is for testing
-        DateTime startOfSeasonDate = new DateTime(2013, 7, 1, 0, 0, 0, 0);
+        DateTime startOfSeasonDate = new DateTime(2013, 7,23, 0, 0, 0, 0);
 
 
         Instant startOfSeasonInstant = new Instant(startOfSeasonDate);

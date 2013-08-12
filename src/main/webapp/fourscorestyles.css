@@ -259,6 +259,18 @@ body {
     background-color: #252525;
 }
 
+#news_tool a {
+    color: lightblue;
+    text-decoration:underline;
+    float:right;
+    margin-right: 50px;
+}
+
+#news_tool a:hover {
+    color: red;
+    text-decoration: none ;
+}
+
 #news_tool div {
     background-color: white;
     color: black;
@@ -293,7 +305,7 @@ body {
     background-color: #252525;
     border-radius: 10px;
     box-shadow: 2px 2px 5px black;
-    margin-left: 40px;
+    margin-left: 0px;
     margin-top: 20px;
 }
 
@@ -341,7 +353,34 @@ body {
 #picks_col {
     color: lightblue;
 }
+#user_week_result_tool {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 630px;
+    padding: 15px;
+    float: left;
+    color: white;
+    background-color: #252525;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
 
+
+#user_week_result_tool table {
+    display: block;
+    float: left;
+    color: white;
+    /*border: 1px solid red;*/
+}
+
+
+#user_week_result_tool table td {
+    background-color: #181818;
+    padding:4px;
+    border: 1px solid black ;
+    box-shadow: 1px 1px 2px black;
+}
 #user_week_result_score {
     text-align: left;
     margin-right: 40px;
@@ -361,6 +400,34 @@ body {
     font-size: 80px;
     text-align: center;
     line-height: 120px;
+}
+
+#all_right {
+    background-image: url('images/winner.jpg') ;
+    text-align: left;
+    margin-right: 34px;
+    margin-top: 20px;
+    position: relative;
+    width: 180px;
+    height:230px;
+    float: right;
+    background-color: #181818;
+    border: 6px ridge lightblue;
+    box-shadow: 6px 6px 10px black;
+
+
+}
+
+#all_right div {
+    text-align: center;
+    padding:5px;
+    width:170px;
+    height:45px;
+    background-color: black;
+    color: lightblue;
+    font-size: 20px;
+    position: absolute;
+    bottom: 0;
 }
 
 #standings_tool {
@@ -384,4 +451,55 @@ body {
     padding:2px;
     border: 1px solid black ;
     box-shadow: 1px 1px 2px black;
+}
+
+#schedule_tool {
+    margin-top: 20px;
+
+    padding: 20px;
+    float: left;
+    color: white;
+    background-color: #252525;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+}
+
+#schedule_tool table {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: white;
+    /*border: 1px solid red;*/
+}
+
+#schedule_tool table td {
+    background-color: #181818;
+    padding:2px;
+    border: 1px solid black ;
+    box-shadow: 1px 1px 2px black;
+}
+
+.admin_tool_button {
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+    width: 110px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: lightgray;
+    color: black;
+    padding: 2px;
+    text-shadow: 1px 1px 1px gray;
+    box-shadow: 3px 3px 2px black;
+}
+
+
+.admin_tool_button:hover {
+    text-shadow: none;
+    color:white;
+    background-color: gray;
+    border: 1px solid lightgray;
+    box-shadow: 2px 2px 2px black;
 }

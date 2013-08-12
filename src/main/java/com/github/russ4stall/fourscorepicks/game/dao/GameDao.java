@@ -20,6 +20,8 @@ public interface GameDao {
      */
     List<Game> getGamesByWeek(int weekNum);
 
+    List<Game> getAllGames();
+
     /**
      * adds to hotgame table
      * @param gameId
@@ -35,6 +37,8 @@ public interface GameDao {
     void setResult(Game game);
 
     void addGame(int awayTeamId, int homeTeamId, int weekNum, String gameTime);
+
+    void removeGame(int gameId);
 
 
 

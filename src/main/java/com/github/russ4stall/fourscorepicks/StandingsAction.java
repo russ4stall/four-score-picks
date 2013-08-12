@@ -1,5 +1,6 @@
 package com.github.russ4stall.fourscorepicks;
 
+import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.user.RosterFactory;
 import com.github.russ4stall.fourscorepicks.user.User;
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,6 +16,7 @@ import java.util.*;
 public class StandingsAction extends ActionSupport {
     private List<User> weekRoster;
     private List<User> seasonRoster;
+    private int weekNum;
 
 
 
@@ -23,7 +25,8 @@ public class StandingsAction extends ActionSupport {
         rosterFactory.calculateScores();
         seasonRoster = rosterFactory.getSeasonRoster();
         weekRoster = rosterFactory.getWeekRoster();
-
+        WeekCalculator weekCalculator = new WeekCalculator();
+        weekNum = weekCalculator.getPreviousWeekOfSeason();
         return INPUT;
     }
 
@@ -35,5 +38,9 @@ public class StandingsAction extends ActionSupport {
 
     public List<User> getSeasonRoster() {
         return seasonRoster;
+    }
+
+    public int getWeekNum() {
+        return weekNum;
     }
 }

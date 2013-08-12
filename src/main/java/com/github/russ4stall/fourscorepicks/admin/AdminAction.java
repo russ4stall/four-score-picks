@@ -1,4 +1,4 @@
-package com.github.russ4stall.fourscorepicks;
+package com.github.russ4stall.fourscorepicks.admin;
 
 import com.github.russ4stall.fourscorepicks.content.ContentDao;
 import com.github.russ4stall.fourscorepicks.content.ContentDaoImpl;
@@ -39,6 +39,7 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
     private List<User> seasonRoster;
     WeekCalculator weekCalculator = new WeekCalculator();
     private String newsText;
+    private int weekNum;
 
     @Override
     public void prepare() throws Exception {
@@ -46,6 +47,7 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
         RosterFactory rosterFactory = new RosterFactory();
         rosterFactory.calculateScores();
         seasonRoster = rosterFactory.getSeasonRoster();
+        weekNum = weekCalculator.getWeekOfSeason();
 
     }
 
@@ -165,5 +167,7 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
         return weekNumNewGame;
     }
 
-
+    public int getWeekNum() {
+        return weekNum;
+    }
 }
