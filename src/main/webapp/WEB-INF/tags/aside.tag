@@ -14,7 +14,7 @@
                       ${rank}.
                       ${user.name}
                       <c:if test="${rank == 1}">
-                        <img src="/images/star-icon.png">
+                        <img src="${pageContext.request.contextPath}/images/star-icon.png">
                       </c:if>
                     <span style="float: right">${user.seasonScore}</span>
                 </div>

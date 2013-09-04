@@ -67,7 +67,8 @@ public class RegisterAction extends ActionSupport implements SessionAware {
 
 
         UserDao userDao = new UserDaoImpl();
-        userDao.addUser(getName(), getEmail(), user.getPassword());
+        int id = userDao.addUser(getName(), getEmail(), user.getPassword());
+        user.setId(id);
 
         session.put("user", user);
 

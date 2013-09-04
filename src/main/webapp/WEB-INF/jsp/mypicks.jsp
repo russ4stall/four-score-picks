@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
     <title>FourScorePicks</title>
 </head>
 <body>
@@ -43,7 +43,7 @@
                 </ul>
 
             </div>
-            <form action="mypicks!execute" method="post">
+            <form action="${pageContext.request.contextPath}/mypicks!execute" method="post">
                 <table>
                     <tr>
                         <th>Date</th>
@@ -84,7 +84,7 @@
                             </td>
                             <td>
                                 <c:if test="${gameAndPick.game.hotGame}">
-                                    <img src="/images/flame1.png" alt="HG">
+                                    <img src="${pageContext.request.contextPath}/images/flame1.png" alt="HG">
                                 </c:if>
                             </td>
                             <td id="picks_col" style="text-align: center">
@@ -97,7 +97,7 @@
                                     </c:when>
                                     <c:when test="${gameAndPick.pick.pickTeamName != null && gameAndPick.game.hotGame}">
                                         <a title="Remove Pick" style="border-bottom: 1px dotted orange"
-                                           href="/mypicks!deletePick?gameId=${gameAndPick.game.id}">${gameAndPick.pick.pickTeamName}</a>
+                                           href="${pageContext.request.contextPath}/mypicks!deletePick?gameId=${gameAndPick.game.id}">${gameAndPick.pick.pickTeamName}</a>
                                     </c:when>
                                     <c:otherwise>
                                         ${gameAndPick.pick.pickTeamName}

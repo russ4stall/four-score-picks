@@ -16,7 +16,7 @@ import java.util.*;
 public class StandingsAction extends ActionSupport {
     private List<User> weekRoster;
     private List<User> seasonRoster;
-    private int weekNum;
+    private int previousWeekNum;
 
 
 
@@ -26,7 +26,7 @@ public class StandingsAction extends ActionSupport {
         seasonRoster = rosterFactory.getSeasonRoster();
         weekRoster = rosterFactory.getWeekRoster();
         WeekCalculator weekCalculator = new WeekCalculator();
-        weekNum = weekCalculator.getPreviousWeekOfSeason();
+        previousWeekNum = weekCalculator.getPreviousWeekOfSeason();
         return INPUT;
     }
 
@@ -40,7 +40,7 @@ public class StandingsAction extends ActionSupport {
         return seasonRoster;
     }
 
-    public int getWeekNum() {
-        return weekNum;
+    public int getPreviousWeekNum() {
+        return previousWeekNum;
     }
 }

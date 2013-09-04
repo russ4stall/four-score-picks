@@ -10,7 +10,7 @@
     <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
     <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
-    <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
     <title>ADMIN</title>
 </head>
 <body>
@@ -25,7 +25,7 @@
         <div id="new_game_tool">
             <span class="tool_title">Add a Game</span><br>
             <br>
-            <form action="editSchedule!addGame" method="post">
+            <form action="${pageContext.request.contextPath}/editSchedule!addGame" method="post">
                 <select name="awayTeamId" autofocus>
                     <option>Away Team</option>
                     <option>----------------</option>
@@ -138,8 +138,8 @@
                         <c:choose>
                            <c:when test="${game.week >= action.weekNum}">
                                <th>
-                                   <a href="editSchedule!removeGame?gameId=${game.id}">
-                                       <img title="Delete Game" src="/images/minus.png">
+                                   <a href="${pageContext.request.contextPath}/editSchedule!removeGame?gameId=${game.id}">
+                                       <img title="Delete Game" src="${pageContext.request.contextPath}/images/minus.png">
                                    </a>
                                </th>
                            </c:when>
@@ -174,19 +174,19 @@
                         <td style="text-align: center;">
                             <c:choose>
                                 <c:when test="${game.hotGame}">
-                                    <a href="editSchedule!removeHotGame?gameIdHotGame=${game.id}&weekNumHotGame=${game.week}">
-                                        <img style="border-bottom: 1px solid orangered" title="Remove Hot Game" src="/images/flame1.png">
+                                    <a href="${pageContext.request.contextPath}/editSchedule!removeHotGame?gameIdHotGame=${game.id}&weekNumHotGame=${game.week}">
+                                        <img style="border-bottom: 1px solid orangered" title="Remove Hot Game" src="${pageContext.request.contextPath}/images/flame1.png">
                                     </a>
 
                                 </c:when>
                                 <c:when test="${!game.hotGame}">
-                                    <a href="editSchedule!addHotGame?gameIdHotGame=${game.id}&weekNumHotGame=${game.week}">
+                                    <a href="${pageContext.request.contextPath}/editSchedule!addHotGame?gameIdHotGame=${game.id}&weekNumHotGame=${game.week}">
                                         <span title="Make Hot Game" style="border: 1px dotted orange">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     </a>
                                 </c:when>
                             </c:choose>
                         </td>
-                    <form action="editSchedule!setResult" method="post">
+                    <form action="${pageContext.request.contextPath}/editSchedule!setResult" method="post">
                         <input type="hidden" name="gameId" value="${game.id}">
                         <input type="hidden" name="homeTeamId" value="${game.homeTeam.id}">
                         <input type="hidden" name="awayTeamId" value="${game.awayTeam.id}">

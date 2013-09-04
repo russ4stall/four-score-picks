@@ -26,7 +26,7 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
     public String input() {
         WeekCalculator week = new WeekCalculator();
-        System.out.println(week.getWeekOfSeason());
+
         return INPUT;
     }
 

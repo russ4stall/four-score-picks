@@ -19,6 +19,7 @@ public class WeekCalculator {
     private DateTime timeToTest;
 
     public WeekCalculator() {
+      //this.timeToTest = new DateTime(2013, 9,10,0,0,0,0);
         this.timeToTest = DateTime.now();
     }
 
@@ -32,14 +33,15 @@ public class WeekCalculator {
         //DateTime startOfSeasonDate = new DateTime(2013, 8, 27, 0, 0, 0, 0);
 
         //rf: this is for testing
-        DateTime startOfSeasonDate = new DateTime(2013, 7,23, 0, 0, 0, 0);
+        DateTime startOfSeasonDate = new DateTime(2013, 8,27, 0, 0, 0, 0);
 
 
         Instant startOfSeasonInstant = new Instant(startOfSeasonDate);
         Weeks weekOfSeason = Weeks.weeksBetween(startOfSeasonInstant, timeToTest);
 
+        DateTime weekOneEnd = new DateTime(2013, 9,10,0,0,0,0);
 
-        if(startOfSeasonDate.isAfterNow()){
+        if(weekOneEnd.isAfter(timeToTest)){
             return 1;
         }
 

@@ -3,7 +3,7 @@
 <html>
 <head>
 
-    <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
     <title>FourScorePicks</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
         <s:password key="password2" label="Confirm Password"/>
         <s:submit value="Submit"/>
     </s:form>
-    Already have an account? <a  style="color: blue; border-bottom: 1px dotted blue;" href="login">Log In</a>
+    Already have an account? <a  style="color: blue; border-bottom: 1px dotted blue;" href="${pageContext.request.contextPath}/login">Log In</a>
 </div>
 </body>
 </html>

@@ -28,7 +28,7 @@ public class HomeAction {
         rosterFactory.calculateScores();
         seasonRoster = rosterFactory.getSeasonRoster();
 
-    return "success";
+        return "success";
     }
 
     public List<User> getSeasonRoster() {

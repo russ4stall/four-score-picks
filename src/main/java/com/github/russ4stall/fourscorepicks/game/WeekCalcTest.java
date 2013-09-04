@@ -22,6 +22,8 @@ public class WeekCalcTest {
                 new DateTime(2013, 9, 5, 0,0,0,0),
                 new DateTime(2013, 9, 9, 0,0,0,0),
                 new DateTime(2013, 9, 11, 0,0,0,0),
+                new DateTime(2013, 9, 16, 0,0,0,0),
+                new DateTime(2013, 9, 18, 0,0,0,0),
                 new DateTime(2013, 11, 28, 0,0,0,0)
         );
 

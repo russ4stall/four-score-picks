@@ -44,22 +44,28 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void addUser(String name, String email, String password) {
+    public int addUser(String name, String email, String password) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        int newId=0;
         SqlUtilities.jbdcUtil();
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
             String query = "INSERT INTO user (name, email, password, registered_on, last_login_on) " +
                     "VALUES (?, ?, ?, now(), now())";
 
-            preparedStatement = connection.prepareStatement(query);
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, password);
 
             preparedStatement.executeUpdate();
+
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                newId = resultSet.getInt(1);
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -67,7 +73,7 @@ public class UserDaoImpl implements UserDao{
             SqlUtilities.closePreparedStatement(preparedStatement);
             SqlUtilities.closeConnection(connection);
         }
-
+           return newId;
     }
 
     @Override

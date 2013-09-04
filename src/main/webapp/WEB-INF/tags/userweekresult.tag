@@ -51,7 +51,7 @@
                 </c:choose>
                 <td>
                     <c:if test="${gameAndPick.game.hotGame}">
-                        <img src="/images/flame1.png" alt="HG">
+                        <img src="${pageContext.request.contextPath}/images/flame1.png" alt="HG">
                     </c:if>
                 </td>
                 <td id="picks_col" style="text-align: center">

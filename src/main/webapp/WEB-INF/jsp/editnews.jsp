@@ -10,7 +10,7 @@
     <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
     <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
-    <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
     <title>ADMIN-Edit</title>
 </head>
 <body>
@@ -23,16 +23,16 @@
         <span class="tool_title" style="color: white">Edit</span>
 
                 <a title="Delete this post"
-                   href="editNews!deleteNews?newsId=${news.id}">
+                   href="${pageContext.request.contextPath}/editNews!deleteNews?newsId=${action.news.id}">
                     delete
                 </a>
 
         <br><br>
 
-        <form action="editNews!editNews" method="post">
-            <input type="hidden" name="newsId" value="${news.id}">
+        <form action="${pageContext.request.contextPath}/editNews!editNews" method="post">
+            <input type="hidden" name="newsId" value="${action.news.id}">
             <textarea name="newsText" cols="74" rows="10">
-                ${news.newsText}
+                ${action.news.newsText}
             </textarea>
             <br>
             <input type="submit" value="Update">

@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
     <title>FourScorePicks</title>
 </head>
 <body>
@@ -46,8 +46,10 @@
                 </c:forEach>
 
             </div>
+        </div>
+        <c:if test="${action.previousWeekNum >= 1}">
             <div id="standings_tool">
-                <span class="tool_title">Week ${weekNum}</span><br>
+                <span class="tool_title">Week ${action.previousWeekNum}</span><br>
                 <br>
 
                 <c:set var="rank" value="1"/>
@@ -75,7 +77,11 @@
 
                 </div>
             </div>
+        </c:if>
+
         </div>
+        </div>
+
         <fsp:aside userList="${action.seasonRoster}"/>
 </body>
 </html>

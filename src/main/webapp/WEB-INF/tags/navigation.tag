@@ -9,10 +9,10 @@
 
     <div id="logged_in_as">
         <c:if test="${sessionScope.user.admin}">
-            <a class="admin_link" href="/admin" >admin tools</a>
+            <a class="admin_link" href="${pageContext.request.contextPath}/admin" >admin tools</a>
         </c:if>
          ${sessionScope.user.name}  &nbsp
-        <a href="/logout" >Log Out</a>
+        <a href="${pageContext.request.contextPath}/logout" >Log Out</a>
 
     </div>
 </div>

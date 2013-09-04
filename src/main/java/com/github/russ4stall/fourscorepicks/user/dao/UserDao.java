@@ -19,7 +19,7 @@ public interface UserDao {
      * @param email users email obtained from registration page
      * @param password users password obtained from registration page
      */
-    void addUser(String name, String email, String password);
+    int addUser(String name, String email, String password);
 
     /**
      *

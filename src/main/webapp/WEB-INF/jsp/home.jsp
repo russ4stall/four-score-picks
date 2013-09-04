@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
     <title>FourScorePicks-Home</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
 
         <div class="news_date"><fmt:formatDate value="${news.datePosted}" type="both" pattern="EEEEEE MMMMMMMMM dd, yyyy"/></div>
         <c:if test="${sessionScope.user.admin}">
-            <a href="editNews?newsId=${news.id}">edit</a>
+            <a href="${pageContext.request.contextPath}/editNews?newsId=${news.id}">edit</a>
         </c:if>
 
         ${news.newsText}

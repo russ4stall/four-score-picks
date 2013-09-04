@@ -7,7 +7,8 @@
 <struts>
     <package name="default" extends="struts-default" namespace="/">
         <interceptors>
-            <interceptor name="loginCheckInterceptor" class="com.github.russ4stall.fourscorepicks.interceptor.LoginCheckInterceptor">
+            <interceptor name="loginCheckInterceptor"
+                         class="com.github.russ4stall.fourscorepicks.interceptor.LoginCheckInterceptor">
             </interceptor>
 
             <interceptor-stack name="newStack">
@@ -26,7 +27,9 @@
                 <interceptor-ref name="staticParams"/>
                 <interceptor-ref name="actionMappingParams"/>
                 <interceptor-ref name="params">
-                    <param name="excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*</param>
+                    <param name="excludeParams">
+                        dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*
+                    </param>
                 </interceptor-ref>
                 <interceptor-ref name="conversionError"/>
                 <interceptor-ref name="validation">
@@ -40,12 +43,16 @@
 
         </interceptors>
 
+        <default-action-ref name="home"/>
+
         <global-results>
             <result name="login" type="redirectAction">
                 <param name="namespace">/</param>
                 <param name="actionName">login</param>
             </result>
-           </global-results>
+        </global-results>
+
+
 
         <action name="standings" class="com.github.russ4stall.fourscorepicks.StandingsAction" method="input">
             <interceptor-ref name="newStack"/>
@@ -84,7 +91,8 @@
             </result>
         </action>
 
-        <action name="editSchedule" class="com.github.russ4stall.fourscorepicks.admin.EditScheduleAction" method="input">
+        <action name="editSchedule" class="com.github.russ4stall.fourscorepicks.admin.EditScheduleAction"
+                method="input">
             <interceptor-ref name="newStack"/>
             <result name="input">/WEB-INF/jsp/editschedule.jsp</result>
             <result name="success" type="redirectAction">
@@ -123,6 +131,7 @@
                 <param name="actionName">home</param>
             </result>
         </action>
+
 
 
     </package>

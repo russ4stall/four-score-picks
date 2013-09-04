@@ -9,7 +9,7 @@
     <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
     <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
 
-    <link rel="stylesheet" type="text/css" href="/fourscorestyles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
     <title>ADMIN</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <div id="work_bench">
 
-            <a class="admin_tool_button" href="editSchedule">Edit Schedule</a>
+            <a class="admin_tool_button" href="${pageContext.request.contextPath}/editSchedule">Edit Schedule</a>
 
         <div id="news_tool">
             <span class="tool_title">Post</span><br><br>
