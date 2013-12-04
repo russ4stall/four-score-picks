@@ -104,6 +104,12 @@ body {
     color:gray;
 }
 
+#nav sup{
+    color:lightblue;
+    font-size: 8px;
+}
+
+
 #wrapper {
     display: block;
     float: left;
@@ -143,6 +149,26 @@ body {
     text-decoration: underline;
 }
 
+#comment_text{
+    background-color: whitesmoke;
+    width:390px;
+    min-height: 45px;
+    padding:5px;
+    overflow-wrap: normal;
+}
+
+.comment_block{
+    width:400px;
+    min-height:95px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #d3d3d3;
+    border: 1px dotted #252525;
+    box-shadow: 5px 5px 10px #222222;
+
+}
+
+
 #news_block a:hover {
     color: darkblue;
     text-decoration: none;
@@ -151,7 +177,7 @@ body {
 .news_date{
 
     font-size:12px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: darkblue;
 
 }
@@ -167,7 +193,10 @@ body {
     border-radius: 50px;
 }
 
-
+#score_board a:hover{
+    text-decoration: underline;
+    color: #d3d3d3 ;
+}
 
 #score_board #display_user {
     background-color: #181818;
@@ -430,7 +459,7 @@ body {
     bottom: 0;
 }
 
-#standings_tool {
+.standings_tool {
     text-align: center;
     margin: 10px;
     padding: 15px;
@@ -441,9 +470,24 @@ body {
     box-shadow: 2px 2px 5px black;
 }
 
+.standings_tool a:hover{
+    text-decoration: underline;
+    color: #d3d3d3 ;
+}
+
+#season_standings_container{
+    float: left;
+    width: 330px;
+}
+
+#week_standings_container{
+    float:left;
+    width: 300px;
+
+}
 
 
-#standings_tool .rank_row {
+.rank_row {
     width: 270px;
     text-align: left;
     background-color: #181818;
@@ -502,4 +546,75 @@ body {
     background-color: gray;
     border: 1px solid lightgray;
     box-shadow: 2px 2px 2px black;
+}
+
+.fancy_button {
+    text-align: center;
+    display: block;
+    max-width: 200px;
+    text-decoration: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: lightgray;
+    color: black;
+    padding: 2px;
+    text-shadow: 1px 1px 1px gray;
+    box-shadow: inset 0px 0px 50px -10px #505050;
+}
+
+.fancy_button:hover {
+    text-shadow: none;
+    color:white;
+    background-color: gray;
+    border: 1px solid lightgray;
+    cursor: pointer;
+}
+
+#comment_section {
+    margin-top: 30px;
+
+}
+
+#comment_text_area {
+    background-color: white;
+    width: 414px;
+    height: 220px;
+    margin-bottom: 50px;
+}
+
+#post_comment_button {
+    width:140px;
+}
+
+#week_stats {
+    float:left;
+    background-color: #252525;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px black;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+#week_stats .sea_wee {
+
+    font-weight: bold;
+    border-bottom: 1px solid red;
+    margin-left: 120px;
+    margin-bottom: 20px;
+
+}
+
+#week_stats h2 {
+    text-align: center;
+    background-color: #181818;
+    padding:10px;
+    border-bottom: 1px dotted #d3d3d3;
+    border-top: 1px dotted #d3d3d3;
+}
+
+.roster {
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }

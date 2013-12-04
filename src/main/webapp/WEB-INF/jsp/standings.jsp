@@ -1,4 +1,4 @@
-<%--@elvariable id="action" type="com.github.russ4stall.fourscorepicks.StandingsAction"--%>
+<%--@elvariable id="action" type="com.github.russ4stall.fourscorepicks.standings.StandingsAction"--%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fsp" tagdir="/WEB-INF/tags" %>
@@ -17,7 +17,9 @@
     <h1>Standings</h1>
 
     <div id="work_bench">
-        <div id="standings_tool">
+        <div id="season_standings_container">
+
+        <div class="standings_tool">
             <span class="tool_title">Season</span><br>
             <br>
 
@@ -35,7 +37,7 @@
 
                         ${rank}.
                     <span>
-                            ${user.name}
+                            <a href="${pageContext.request.contextPath}/userPicks?userId=${user.id}">${user.name}</a>
 
                     </span>
                     <span style="float: right">
@@ -47,9 +49,17 @@
 
             </div>
         </div>
-        <c:if test="${action.previousWeekNum >= 1}">
-            <div id="standings_tool">
-                <span class="tool_title">Week ${action.previousWeekNum}</span><br>
+        </div>
+
+
+
+
+
+        <div id="week_standings_container">
+
+
+            <div class="standings_tool">
+                <span class="tool_title">Week ${action.weekNum}</span><br>
                 <br>
 
                 <c:set var="rank" value="1"/>
@@ -66,7 +76,7 @@
                 </c:choose>
                             ${rank}.
                     <span>
-                        ${user.name}
+                        <a href="${pageContext.request.contextPath}/userPicks?userId=${user.id}">${user.name}</a>
                     </span>
                     <span style="float: right">
                             ${user.weekScore}
@@ -76,10 +86,13 @@
                     </c:forEach>
 
                 </div>
-            </div>
-        </c:if>
+
+
+
 
         </div>
+</div>
+
         </div>
 
         <fsp:aside userList="${action.seasonRoster}"/>

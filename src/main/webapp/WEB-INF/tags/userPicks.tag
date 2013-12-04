@@ -1,4 +1,4 @@
-<%--@elvariable id="action" type="com.github.russ4stall.fourscorepicks.pick.MyPicksAction"--%>
+<%--@elvariable id="action" type="com.github.russ4stall.fourscorepicks.pick.UserPicksAction"--%>
 <%@ tag body-content="empty" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -23,6 +23,7 @@
         </tr>
 
         <c:forEach items="${userResultList}" var="gameAndPick">
+        <c:if test="${gameAndPick.game.gameHasStarted}">
             <c:choose>
                 <c:when test="${gameAndPick.game.hotGame}">
                     <c:set var="pointsPossible" value="${pointsPossible+2}"/>
@@ -69,9 +70,6 @@
                                     <span style="color: lightgreen">${gameAndPick.pick.pickTeamName}</span> <sup>+2</sup>
                                     <c:set var="userScore" value="${userScore+2}"/>
                                 </c:when>
-                                <c:when test="${gameAndPick.game.winningTeam.id == 0}">
-                                    <span style="color: white">${gameAndPick.pick.pickTeamName}</span>
-                                </c:when>
                                 <c:otherwise>
                                     <span style="color: #FFA6A6">${gameAndPick.pick.pickTeamName}</span>
                                 </c:otherwise>
@@ -83,17 +81,15 @@
                                     <span style="color: lightgreen">${gameAndPick.pick.pickTeamName}</span> <sup>+1</sup>
                                     <c:set var="userScore" value="${userScore+1}"/>
                                 </c:when>
-                                <c:when test="${gameAndPick.game.winningTeam.id == 0}">
-                                    <span style="color: white">${gameAndPick.pick.pickTeamName}</span>
-                                </c:when>
                                 <c:otherwise>
                                     <span style="color: #FFA6A6">${gameAndPick.pick.pickTeamName}</span>
                                 </c:otherwise>
-                            </c:choose>
-                        </c:otherwise>
+                            </c:choose> </c:otherwise>
                     </c:choose>
-               </td>
+                </td>
             </tr>
+
+        </c:if>
         </c:forEach>
     </table>
     <c:if test="${userScore >= pointsPossible}">
@@ -103,8 +99,8 @@
         </div>
     </c:if>
     <div id="user_week_result_score">
-        Your score for week ${userResultList[0].game.week}
-                <div>${userScore}</div>
+        &nbsp &nbsp &nbsp Score for week ${userResultList[0].game.week}
+        <div>${userScore}</div>
     </div>
 
 </div>

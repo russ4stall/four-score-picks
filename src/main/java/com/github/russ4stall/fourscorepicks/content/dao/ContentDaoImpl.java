@@ -1,5 +1,7 @@
-package com.github.russ4stall.fourscorepicks.content;
+package com.github.russ4stall.fourscorepicks.content.dao;
 
+import com.github.russ4stall.fourscorepicks.content.Comment;
+import com.github.russ4stall.fourscorepicks.content.News;
 import com.github.russ4stall.fourscorepicks.game.Game;
 import com.github.russ4stall.fourscorepicks.game.Team;
 import com.github.russ4stall.fourscorepicks.user.User;
@@ -102,6 +104,46 @@ public class ContentDaoImpl implements ContentDao {
                 newsList.add(news);
             }
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeResultSet(resultSet);
+            SqlUtilities.closeConnection(connection);
+        }
+
+        return newsList;
+    }
+
+
+    @Override
+    public List<Comment> getCommentList() {
+        List<Comment> commentList = new ArrayList<Comment>();
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            preparedStatement = connection.prepareStatement("SELECT * FROM comments c JOIN user u ON u.id = c.user_id ORDER BY date_posted DESC");
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Comment comment = new Comment();
+                comment.setDatePosted(resultSet.getTimestamp("date_posted"));
+                comment.setCommentText(resultSet.getString("comment_text"));
+                comment.setId(resultSet.getInt("id"));
+                User user = new User();
+                user.setId(resultSet.getInt("user_id"));
+                user.setName(resultSet.getString("name"));
+                user.setEmail(resultSet.getString("email"));
+                comment.setUser(user);
+                commentList.add(comment);
+            }
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -111,10 +153,7 @@ public class ContentDaoImpl implements ContentDao {
             SqlUtilities.closeConnection(connection);
         }
 
-
-
-
-        return newsList;
+        return commentList;
     }
 
     @Override
@@ -175,12 +214,106 @@ public class ContentDaoImpl implements ContentDao {
     }
 
     @Override
-    public void addComment(String comment, User user) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public int addComment(String comment, int userId) {
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int id = 0;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+
+            String query = "INSERT INTO comments (comment_text, user_id, date_posted) " +
+                    "VALUES (?, ?, now())";
+
+
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, comment);
+            preparedStatement.setInt(2, userId);
+
+            preparedStatement.executeUpdate();
+
+            resultSet = preparedStatement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }
+        return id;
     }
 
     @Override
     public void deleteComment(int id) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            String query = "DELETE FROM comments WHERE id=?";
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }
+    }
+
+
+    @Override
+    public Comment getComment(int id) {
+        SqlUtilities.jbdcUtil();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Comment comment = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+
+            String query = "SELECT * FROM comments c JOIN user u on c.user_id = u.id WHERE c.id = ?";
+
+
+            preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            comment = new Comment();
+            comment.setDatePosted(resultSet.getTimestamp("date_posted"));
+            comment.setCommentText(resultSet.getString("comment_text"));
+            comment.setId(id);
+            User user = new User();
+            user.setId(resultSet.getInt("user_id"));
+            user.setName(resultSet.getString("name"));
+            user.setEmail(resultSet.getString("email"));
+            comment.setUser(user);
+
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+        }
+
+
+
+        return comment;
     }
 }

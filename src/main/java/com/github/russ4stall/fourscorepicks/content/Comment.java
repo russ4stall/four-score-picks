@@ -14,6 +14,7 @@ public class Comment {
     private User user;
     private String commentText;
     private Timestamp datePosted;
+    private int id;
 
 
     public User getUser() {
@@ -38,5 +39,13 @@ public class Comment {
 
     public void setDatePosted(Timestamp datePosted) {
         this.datePosted = datePosted;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

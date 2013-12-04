@@ -138,6 +138,7 @@ public class UserDaoImpl implements UserDao{
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
                 user.setAdmin(resultSet.getBoolean("is_admin"));
+
                 userList.add(user);
             }
 
@@ -152,6 +153,44 @@ public class UserDaoImpl implements UserDao{
         }
 
         return userList;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        User user = null;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        SqlUtilities.jbdcUtil();
+        String query = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+
+            query = "SELECT * FROM user WHERE id=?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            user = new User();
+            user.setId(resultSet.getInt("id"));
+            user.setName(resultSet.getString("name"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPassword(resultSet.getString("password"));
+            user.setAdmin(resultSet.getBoolean("is_admin"));
+
+
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            SqlUtilities.closePreparedStatement(preparedStatement);
+            SqlUtilities.closeConnection(connection);
+            SqlUtilities.closeResultSet(resultSet);
+        }
+
+        return user;
     }
 }
 

@@ -5,9 +5,12 @@ import com.github.russ4stall.fourscorepicks.user.User;
 import com.github.russ4stall.fourscorepicks.user.dao.UserDao;
 import com.github.russ4stall.fourscorepicks.user.dao.UserDaoImpl;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.mindrot.jbcrypt.BCrypt;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -18,11 +21,13 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  *
  * @author Russ Forstall
  */
-public class LoginAction extends ActionSupport implements SessionAware {
+public class LoginAction extends ActionSupport implements SessionAware, ServletResponseAware {
     private User user;
     private String email;
     private String password;
     private Map<String, Object> session;
+    private HttpServletResponse response;
+    private boolean rememberMe;
 
     public String input() {
         WeekCalculator week = new WeekCalculator();
@@ -51,12 +56,16 @@ public class LoginAction extends ActionSupport implements SessionAware {
                 addFieldError("password", "Password doesn't match");
             }
         }
-
-
     }
 
     public String execute() {
         session.put("user", user);
+
+        if (rememberMe){
+            Cookie cookie = new Cookie("remember-me", "email=" + email + "&password=" + user.getPassword());
+            cookie.setMaxAge(604800);
+            response.addCookie(cookie);
+        }
 
         return SUCCESS;
     }
@@ -80,5 +89,14 @@ public class LoginAction extends ActionSupport implements SessionAware {
     @Override
     public void setSession(Map<String, Object> session) {
         this.session = session;
+    }
+
+    @Override
+    public void setServletResponse(HttpServletResponse response) {
+        this.response = response;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }
