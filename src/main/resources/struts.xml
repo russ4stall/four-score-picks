@@ -54,9 +54,9 @@
 
 
 
-        <action name="standings" class="com.github.russ4stall.fourscorepicks.StandingsAction" method="input">
+        <action name="standings" class="com.github.russ4stall.fourscorepicks.standings.StandingsAction" method="input">
             <interceptor-ref name="newStack"/>
-            <result name="input">/WEB-INF/jsp/standings.jsp</result>
+            <result name="input">/WEB-INF/jsp/standings_copy.jsp</result>
         </action>
 
         <action name="mypicks" class="com.github.russ4stall.fourscorepicks.pick.MyPicksAction" method="input">
@@ -66,6 +66,11 @@
                 <param name="namespace">/</param>
                 <param name="actionName">mypicks</param>
             </result>
+        </action>
+
+        <action name="userPicks" class="com.github.russ4stall.fourscorepicks.pick.UserPicksAction">
+            <interceptor-ref name="newStack"/>
+            <result name="success">/WEB-INF/jsp/userPicks.jsp</result>
         </action>
 
         <action name="admin" class="com.github.russ4stall.fourscorepicks.admin.AdminAction" method="input">
@@ -81,7 +86,9 @@
             </result>
         </action>
 
-        <action name="editNews" class="com.github.russ4stall.fourscorepicks.content.EditNewsAction" method="input">
+
+
+        <action name="editNews" class="com.github.russ4stall.fourscorepicks.content.action.EditNewsAction" method="input">
             <interceptor-ref name="newStack"/>
             <result name="input">/WEB-INF/jsp/editnews.jsp</result>
 
@@ -112,6 +119,25 @@
         <action name="home" class="com.github.russ4stall.fourscorepicks.HomeAction" method="input">
             <interceptor-ref name="newStack"/>
             <result name="success">/WEB-INF/jsp/home.jsp</result>
+        </action>
+
+        <action name="trashTalk" class="com.github.russ4stall.fourscorepicks.content.action.TrashTalkAction" method="input">
+            <interceptor-ref name="newStack"/>
+            <result name="success">/WEB-INF/jsp/trashTalk.jsp</result>
+        </action>
+
+        <action name="deleteComment" class="com.github.russ4stall.fourscorepicks.content.action.DeleteCommentAction">
+            <interceptor-ref name="newStack"/>
+            <result name="success" type="httpheader">200</result>
+        </action>
+
+        <action name="addComment" class="com.github.russ4stall.fourscorepicks.content.action.AddCommentAction">
+            <interceptor-ref name="newStack"/>
+           <!-- <result name="success">/WEB-INF/jsp/newComment.jsp</result>-->
+            <result name="success" type="redirectAction">
+                <param name="namespace">/</param>
+                <param name="actionName">trashTalk</param>
+            </result>
         </action>
 
         <action name="register" class="com.github.russ4stall.fourscorepicks.user.action.RegisterAction" method="input">

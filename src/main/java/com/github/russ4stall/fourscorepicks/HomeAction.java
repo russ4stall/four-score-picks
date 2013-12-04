@@ -1,7 +1,7 @@
 package com.github.russ4stall.fourscorepicks;
 
-import com.github.russ4stall.fourscorepicks.content.ContentDao;
-import com.github.russ4stall.fourscorepicks.content.ContentDaoImpl;
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDao;
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDaoImpl;
 import com.github.russ4stall.fourscorepicks.content.News;
 import com.github.russ4stall.fourscorepicks.user.RosterFactory;
 import com.github.russ4stall.fourscorepicks.user.User;

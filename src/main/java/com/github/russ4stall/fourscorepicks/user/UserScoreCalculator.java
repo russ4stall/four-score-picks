@@ -23,4 +23,6 @@ public interface UserScoreCalculator {
      */
     int getSeasonScore(int userId);
 
+    int getSeasonScore(int userId, int weekOfSeason);
+
 }

@@ -1,22 +1,35 @@
 package com.github.russ4stall.fourscorepicks.admin;
 
-import com.github.russ4stall.fourscorepicks.content.ContentDao;
-import com.github.russ4stall.fourscorepicks.content.ContentDaoImpl;
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDao;
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDaoImpl;
 import com.github.russ4stall.fourscorepicks.game.Game;
 import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDao;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDaoImpl;
 import com.github.russ4stall.fourscorepicks.user.RosterFactory;
 import com.github.russ4stall.fourscorepicks.user.User;
+import com.github.russ4stall.fourscorepicks.user.dao.UserDao;
+import com.github.russ4stall.fourscorepicks.user.dao.UserDaoImpl;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Date: 7/19/13
@@ -40,6 +53,7 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
     WeekCalculator weekCalculator = new WeekCalculator();
     private String newsText;
     private int weekNum;
+    private boolean sendAsEmail;
 
     @Override
     public void prepare() throws Exception {
@@ -60,10 +74,54 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
         ContentDao contentDao = new ContentDaoImpl();
         contentDao.addNews(getNewsText(), user);
 
+        if(sendAsEmail){
+            UserDao userDao = new UserDaoImpl();
+            List<User> users = userDao.getUserList();
+            System.out.println("Send email to the following:");
+            for (User recipients : users){
+                /*System.out.println(recipients.getEmail());*/
+                sendNewsEmail(recipients.getEmail());
+            }
+        }
+
         return "redirectHome";
     }
 
 
+    private void sendNewsEmail(String userEmail){
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "192.168.2.41");
+        props.put("mail.smtp.port", "25");
+       /* props.put("mail.smtp.user", "forstallr@infinity-software.com");
+        props.put("mail.smtp.password", "fhSKMnqWRK_Y7OSeW5o2IQ");*/
+
+        Session session = Session.getDefaultInstance(props, null);
+
+        String footer = "\n \n \n \nThis is an automated email. Do not respond to this address";
+
+        String msgBody = newsText + footer;
+
+        try {
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress("noreply@forstall.isd-testnet.com", "Four Score Picks"));
+            msg.addRecipient(Message.RecipientType.TO,
+                    new InternetAddress(userEmail));
+            msg.setSubject("Four Score Picks: News Update!");
+            //msg.setText(msgBody);
+            msg.setContent(msgBody, "text/html");
+            Transport.send(msg);
+
+        } catch (AddressException e) {
+            System.out.println(e);
+        } catch (MessagingException e) {
+            System.out.println(e);
+        } catch (UnsupportedEncodingException e) {
+            System.out.println(e);
+        }
+
+
+    }
 
     public String addGame(){
         String dateTime = getGameDay() + " " + getGameTime();
@@ -169,5 +227,9 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
 
     public int getWeekNum() {
         return weekNum;
+    }
+
+    public void setSendAsEmail(boolean sendAsEmail) {
+        this.sendAsEmail = sendAsEmail;
     }
 }

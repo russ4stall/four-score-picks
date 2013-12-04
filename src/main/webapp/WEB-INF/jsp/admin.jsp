@@ -26,7 +26,10 @@
             <span class="tool_title">Post</span><br><br>
             <form action="admin!postNews" method="post">
 
-                <textarea name="newsText" cols="74" rows="10"> </textarea>
+                <textarea id="text_area_bg" name="newsText" cols="74" rows="10"> </textarea>
+                <br>
+                <input type="checkbox" name="sendAsEmail" value="true"> Email this to all users
+                <br>
                 <br>
                 <input type="submit" value="Post">
 

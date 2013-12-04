@@ -96,8 +96,15 @@
                                         <span style="color: #FFA6A6; font-style: italic">none</span>
                                     </c:when>
                                     <c:when test="${gameAndPick.pick.pickTeamName != null && gameAndPick.game.hotGame}">
-                                        <a title="Remove Pick" style="border-bottom: 1px dotted orange"
-                                           href="${pageContext.request.contextPath}/mypicks!deletePick?gameId=${gameAndPick.game.id}">${gameAndPick.pick.pickTeamName}</a>
+                                        <c:choose>
+                                            <c:when test="${!gameAndPick.game.gameHasStarted}">
+                                                <a title="Remove Pick" style="border-bottom: 1px dotted orange"
+                                                href="${pageContext.request.contextPath}/mypicks!deletePick?gameId=${gameAndPick.game.id}">${gameAndPick.pick.pickTeamName}</a>
+                                            </c:when>
+                                            <c:when test="${gameAndPick.game.gameHasStarted}">
+                                                ${gameAndPick.pick.pickTeamName}
+                                            </c:when>
+                                        </c:choose>
                                     </c:when>
                                     <c:otherwise>
                                         ${gameAndPick.pick.pickTeamName}

@@ -21,6 +21,7 @@
 <s:form action="login!execute" method="post">
     <s:textfield key="email" type="email" label="Email Address"/>
     <s:password key="password" label="Password"/>
+    <s:checkbox key="rememberMe" label="Remember Me" value="true"/>
     <s:submit value="Login"/>
 </s:form>
    Don't have an account? <a style="color: blue; border-bottom: 1px dotted blue;" href="${pageContext.request.contextPath}/register">Sign Up</a>

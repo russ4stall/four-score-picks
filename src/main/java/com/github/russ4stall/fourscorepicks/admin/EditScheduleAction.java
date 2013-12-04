@@ -70,14 +70,14 @@ public class EditScheduleAction extends ActionSupport implements SessionAware, P
 
         if(awayTeamScore > homeTeamScore){
             winningTeam.setId(awayTeamId);
-        } else {
+        } else if (awayTeamScore < homeTeamScore){
             winningTeam.setId(homeTeamId);
+        } else {
+            winningTeam.setId(0);
         }
         game.setWinningTeam(winningTeam);
 
         gameDao.setResult(game);
-
-        System.out.println(winningTeam.getId());
 
         return SUCCESS;
     }

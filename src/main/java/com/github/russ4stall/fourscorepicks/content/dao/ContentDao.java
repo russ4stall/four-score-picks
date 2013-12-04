@@ -1,5 +1,7 @@
-package com.github.russ4stall.fourscorepicks.content;
+package com.github.russ4stall.fourscorepicks.content.dao;
 
+import com.github.russ4stall.fourscorepicks.content.Comment;
+import com.github.russ4stall.fourscorepicks.content.News;
 import com.github.russ4stall.fourscorepicks.user.User;
 
 import java.util.List;
@@ -22,8 +24,12 @@ public interface ContentDao {
 
     List<News> getNewsList();
 
-    void addComment(String comment, User user);
+    List<Comment> getCommentList();
+
+    int addComment(String comment, int userId);
 
     void deleteComment(int id);
+
+    Comment getComment(int id);
 
 }

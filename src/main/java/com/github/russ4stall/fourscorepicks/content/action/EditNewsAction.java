@@ -1,5 +1,8 @@
-package com.github.russ4stall.fourscorepicks.content;
+package com.github.russ4stall.fourscorepicks.content.action;
 
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDao;
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDaoImpl;
+import com.github.russ4stall.fourscorepicks.content.News;
 import com.github.russ4stall.fourscorepicks.user.RosterFactory;
 import com.github.russ4stall.fourscorepicks.user.User;
 import com.opensymphony.xwork2.ActionSupport;

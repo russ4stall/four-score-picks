@@ -31,7 +31,6 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  */
 public class MyPicksAction extends ActionSupport implements SessionAware, Preparable {
     private List<Game> gameList;
-    private List<GameAndPick> userResultList;
     private List<List> weekUserResultList;
     private List<GameAndPick> gameAndPickList;
     private GameDao gameDao = new GameDaoImpl();
@@ -52,8 +51,9 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
         seasonRoster = rosterFactory.getSeasonRoster();
         user = (User) session.get("user");
         gameList = gameDao.getGamesByWeek(weekCalculator.getWeekOfSeason());
-        for (int i=weekCalculator.getPreviousWeekOfSeason(); i >= 1; i--){
-            userResultList = pickDao.getGameAndPickByWeek(user.getId(), i);
+       // for (int i=weekCalculator.getPreviousWeekOfSeason(); i >= 1; i--){
+        for (int i=weekCalculator.getWeekOfSeason(); i >= 1; i--){
+            List<GameAndPick> userResultList = pickDao.getGameAndPickByWeek(user.getId(), i);
             weekUserResultList.add(userResultList);
         }
         gameAndPickList = pickDao.getGameAndPickByWeek(user.getId(), weekCalculator.getWeekOfSeason());
@@ -134,13 +134,6 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
         this.gameId = gameId;
     }
 
-    public List<GameAndPick> getUserResultList() {
-        return userResultList;
-    }
-
-    public void setUserResultList(List<GameAndPick> userResultList) {
-        this.userResultList = userResultList;
-    }
 
     public List getWeekUserResultList() {
         return weekUserResultList;

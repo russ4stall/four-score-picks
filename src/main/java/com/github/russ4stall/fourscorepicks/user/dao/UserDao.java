@@ -42,4 +42,6 @@ public interface UserDao {
     boolean emailExistsCheck(String email);
 
     List<User> getUserList();
+
+    User getUserById(int id);
 }
