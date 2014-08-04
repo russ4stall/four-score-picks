@@ -36,6 +36,7 @@ import javax.mail.internet.MimeMessage;
  * Time: 8:44 AM
  *
  * @author Russ Forstall
+ * testing vcs
  */
 public class AdminAction extends ActionSupport implements SessionAware, Preparable {
     List<Game> gameList = new ArrayList<Game>();
