@@ -21,7 +21,8 @@ CREATE TABLE game (
 
 CREATE TABLE team (
   id int NOT NULL,
-  name int NOT NULL,
+  name varchar(45) NOT NULL,
+  location varchar(45),
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -41,7 +42,7 @@ CREATE TABLE news (
 
 CREATE TABLE comments (
   id int NOT NULL AUTO_INCREMENT,
-  comment_text TEXT NOT NULL,
+  comment_text TEXT,
   user_id int NOT NULL,
   date_posted datetime NOT NULL,
   PRIMARY KEY (id)
@@ -56,6 +57,7 @@ CREATE TABLE result (
   game_id int NOT NULL,
   winner_id int NOT NULL,
   home_team_score int NOT NULL,
-  away_team_score int NOT NULL
+  away_team_score int NOT NULL,
+  PRIMARY KEY (game_id)
   );
 

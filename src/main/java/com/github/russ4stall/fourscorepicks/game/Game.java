@@ -1,5 +1,7 @@
 package com.github.russ4stall.fourscorepicks.game;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +12,7 @@ import java.util.Date;
  *
  * @author Russ Forstall
  */
+@Entity
 public class Game {
     private int id;
     private Team homeTeam;
