@@ -61,11 +61,11 @@ public class UserScoreCalculatorImpl implements UserScoreCalculator {
 
 
         }
+
         //if user picks all correct, add 5
         if (weekScore == pointsPossible) {
             weekScore = weekScore + 5;
         }
-
 
         return weekScore;
     }

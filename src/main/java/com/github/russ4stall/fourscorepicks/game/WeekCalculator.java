@@ -30,16 +30,14 @@ public class WeekCalculator {
     //todo at start of season, change to return weekOfSeason
     public int getWeekOfSeason() {
         //rf: this is the actual start of the season
-        //DateTime startOfSeasonDate = new DateTime(2013, 8, 27, 0, 0, 0, 0);
-
-        //rf: this is for testing
-        DateTime startOfSeasonDate = new DateTime(2013, 8,27, 0, 0, 0, 0);
-
+        //DateTime startOfSeasonDate = new DateTime(2014, 8, 27, 0, 0, 0, 0);
+        DateTime startOfSeasonDate = new DateTime(2014, 7, 27, 0, 0, 0, 0);
 
         Instant startOfSeasonInstant = new Instant(startOfSeasonDate);
         Weeks weekOfSeason = Weeks.weeksBetween(startOfSeasonInstant, timeToTest);
 
-        DateTime weekOneEnd = new DateTime(2013, 9,10,0,0,0,0);
+       //DateTime weekOneEnd = new DateTime(2014, 9,10,0,0,0,0);
+       DateTime weekOneEnd = new DateTime(2014, 8,11,0,0,0,0);
 
         if(weekOneEnd.isAfter(timeToTest)){
             return 1;

@@ -47,7 +47,13 @@ public class WebAppContextListener implements ServletContextListener {
                     .withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.THURSDAY, 15, 0))
                     .build();
 
+
+
+
             scheduler.scheduleJob(emailJobDetail, emailTrigger);
+
+            //todo: create a job for PersistUserWeekScoreTask
+
             scheduler.start();
         } catch (SchedulerException e) {
             throw new RuntimeException("Unable to start quartz", e);
