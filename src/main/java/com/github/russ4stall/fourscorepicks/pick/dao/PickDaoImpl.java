@@ -89,12 +89,12 @@ public class PickDaoImpl implements PickDao {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
 
-            preparedStatement = connection.prepareStatement("SELECT p.*, g.date_time, t.name " +
+            preparedStatement = connection.prepareStatement("SELECT p.*, g.game_time, t.name " +
                     "FROM pick p " +
                     "JOIN game g ON g.id=p.game_id " +
                     "JOIN team t ON t.id=p.pick " +
                     "WHERE week=? AND p.user_id=? " +
-                    "ORDER BY g.date_time, p.game_id ASC");
+                    "ORDER BY g.game_time, p.game_id ASC");
 
             preparedStatement.setInt(1, weekNum);
             preparedStatement.setInt(2, userId);
@@ -147,7 +147,7 @@ public class PickDaoImpl implements PickDao {
                     "LEFT OUTER JOIN pick p ON p.game_id=g.id AND p.user_id=? " +
                     "LEFT OUTER JOIN team t3 ON t3.id=p.pick " +
                     "LEFT OUTER JOIN hot_game hg ON hg.game_id=g.id " +
-                    "WHERE g.week=? ORDER BY g.date_time, g.id ASC");
+                    "WHERE g.week=? ORDER BY g.game_time, g.id ASC");
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, weekNum);
             resultSet = preparedStatement.executeQuery();
@@ -168,7 +168,7 @@ public class PickDaoImpl implements PickDao {
                 game.setHomeTeam(homeTeam);
                 game.setWinningTeam(winningTeam);
                 game.setId(resultSet.getInt("g.id"));
-                game.setGameTime(resultSet.getTimestamp("g.date_time"));
+                game.setGameTime(resultSet.getTimestamp("g.game_time"));
                 game.setWeek(resultSet.getInt("week"));
                 resultSet.getInt("hot_game");
                 if(!resultSet.wasNull()){
@@ -225,7 +225,7 @@ public class PickDaoImpl implements PickDao {
                     "LEFT OUTER JOIN pick p ON p.game_id=g.id AND p.user_id=? " +
                     "LEFT OUTER JOIN team t3 ON t3.id=p.pick " +
                     "LEFT OUTER JOIN hot_game hg ON hg.game_id=g.id " +
-                    "ORDER BY g.date_time, g.id ASC");
+                    "ORDER BY g.game_time, g.id ASC");
             preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
 
@@ -245,7 +245,7 @@ public class PickDaoImpl implements PickDao {
                 game.setHomeTeam(homeTeam);
                 game.setWinningTeam(winningTeam);
                 game.setId(resultSet.getInt("g.id"));
-                game.setGameTime(resultSet.getTimestamp("g.date_time"));
+                game.setGameTime(resultSet.getTimestamp("g.game_time"));
                 game.setWeek(resultSet.getInt("week"));
                 resultSet.getInt("hot_game");
                 if(!resultSet.wasNull()){

@@ -5,6 +5,7 @@ import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,16 +16,16 @@ import java.util.List;
  */
 //@Entity
 public class User {
+    private int id;
     private String name;
     private String email;
     private String password;
-    private boolean admin;
+    private boolean isAdmin;
+    private Date createdOn;
     private Integer weekScore;
     private List<Integer> weeklyScores;
     private List<Integer> weeklySeasonScores;
     private Integer seasonScore;
-    private int id;
-
 
 
     public void calculateScores(){
@@ -66,7 +67,6 @@ public class User {
         this.weeklyScores = weeklyScores;
     }
 
-    @Id
     public int getId() {
         return id;
     }
@@ -100,11 +100,19 @@ public class User {
     }
 
     public boolean isAdmin() {
-        return admin;
+        return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
     }
 
     public Integer getSeasonScore() {

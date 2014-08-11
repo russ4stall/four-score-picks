@@ -28,7 +28,7 @@ public class GameDaoImpl implements GameDao {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
 
 
-            String query = "INSERT INTO game (away_team, home_team, week, date_time ) " +
+            String query = "INSERT INTO game (away_team, home_team, week, game_time ) " +
                     "VALUES (?, ?, ?, ?)";
 
             preparedStatement = connection.prepareStatement(query);
@@ -91,7 +91,7 @@ public class GameDaoImpl implements GameDao {
                     "LEFT OUTER JOIN team t3 ON t3.id=r.winner_id " +
                     "LEFT OUTER JOIN hot_game hg ON hg.game_id=g.id " +
                     "WHERE g.week=? " +
-                    "ORDER BY g.date_time, g.id ASC");
+                    "ORDER BY g.game_time, g.id ASC");
 
             preparedStatement.setInt(1, weekNum);
             resultSet = preparedStatement.executeQuery();
@@ -113,7 +113,7 @@ public class GameDaoImpl implements GameDao {
             game.setWinningTeam(winningTeam);
             game.setId(resultSet.getInt("g.id"));
             game.setWeek(resultSet.getInt("week"));
-            game.setGameTime(resultSet.getTimestamp("g.date_time"));
+            game.setGameTime(resultSet.getTimestamp("g.game_time"));
             resultSet.getInt("hot_game");
             if(!resultSet.wasNull()){
                 game.setHotGame(true);
@@ -155,7 +155,7 @@ public class GameDaoImpl implements GameDao {
                     "JOIN team t2 ON t2.id=g.home_team " +
                     "LEFT OUTER JOIN team t3 ON t3.id=r.winner_id " +
                     "LEFT OUTER JOIN hot_game hg ON hg.game_id=g.id " +
-                    "ORDER BY g.date_time, g.id ASC");
+                    "ORDER BY g.game_time, g.id ASC");
 
 
             resultSet = preparedStatement.executeQuery();
@@ -179,7 +179,7 @@ public class GameDaoImpl implements GameDao {
                 game.setWinningTeam(winningTeam);
                 game.setId(resultSet.getInt("g.id"));
                 game.setWeek(resultSet.getInt("week"));
-                game.setGameTime(resultSet.getTimestamp("g.date_time"));
+                game.setGameTime(resultSet.getTimestamp("g.game_time"));
                 resultSet.getInt("hot_game");
                 if(!resultSet.wasNull()){
                     game.setHotGame(true);

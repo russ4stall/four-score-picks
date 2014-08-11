@@ -96,7 +96,7 @@ public class UserDaoImpl implements UserDao{
             user.setName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
             user.setPassword(resultSet.getString("password"));
-            user.setAdmin(resultSet.getBoolean("is_admin"));
+            user.setIsAdmin(resultSet.getBoolean("is_admin"));
 
 
             if (Objects.equal(password, user.getPassword())){
@@ -137,7 +137,7 @@ public class UserDaoImpl implements UserDao{
                 user.setName(resultSet.getString("name"));
                 user.setEmail(resultSet.getString("email"));
                 user.setPassword(resultSet.getString("password"));
-                user.setAdmin(resultSet.getBoolean("is_admin"));
+                user.setIsAdmin(resultSet.getBoolean("is_admin"));
 
                 userList.add(user);
             }
@@ -176,7 +176,7 @@ public class UserDaoImpl implements UserDao{
             user.setName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
             user.setPassword(resultSet.getString("password"));
-            user.setAdmin(resultSet.getBoolean("is_admin"));
+            user.setIsAdmin(resultSet.getBoolean("is_admin"));
 
 
 
