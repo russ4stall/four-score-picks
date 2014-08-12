@@ -2,8 +2,6 @@ package com.github.russ4stall.fourscorepicks.content.dao;
 
 import com.github.russ4stall.fourscorepicks.content.Comment;
 import com.github.russ4stall.fourscorepicks.content.News;
-import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.game.Team;
 import com.github.russ4stall.fourscorepicks.user.User;
 import com.github.russ4stall.fourscorepicks.utility.SqlUtilities;
 

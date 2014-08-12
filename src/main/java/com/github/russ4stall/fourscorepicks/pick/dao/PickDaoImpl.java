@@ -1,7 +1,7 @@
 package com.github.russ4stall.fourscorepicks.pick.dao;
 
 import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.game.Team;
+import com.github.russ4stall.fourscorepicks.Team.Team;
 import com.github.russ4stall.fourscorepicks.pick.GameAndPick;
 import com.github.russ4stall.fourscorepicks.pick.Pick;
 import com.github.russ4stall.fourscorepicks.utility.SqlUtilities;

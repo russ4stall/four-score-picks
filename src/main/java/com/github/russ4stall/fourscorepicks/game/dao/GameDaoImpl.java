@@ -1,14 +1,12 @@
 package com.github.russ4stall.fourscorepicks.game.dao;
 
 import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.game.Team;
+import com.github.russ4stall.fourscorepicks.Team.Team;
 import com.github.russ4stall.fourscorepicks.utility.SqlUtilities;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Date: 7/19/13

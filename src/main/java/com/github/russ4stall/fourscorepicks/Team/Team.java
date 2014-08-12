@@ -7,9 +7,26 @@ package com.github.russ4stall.fourscorepicks.Team;
  * @author Russ Forstall
  */
 public class Team {
-    String name;
-    String location;
     int id;
+    String location;
+    String name;
+
+    public Team() {
+    }
+
+    public Team(int id, String location, String name) {
+        this.id = id;
+        this.location = location;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLocation() {
         return location;
@@ -25,13 +42,5 @@ public class Team {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

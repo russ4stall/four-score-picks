@@ -1,7 +1,7 @@
 package com.github.russ4stall.fourscorepicks.admin;
 
 import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.game.Team;
+import com.github.russ4stall.fourscorepicks.Team.Team;
 import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDao;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDaoImpl;

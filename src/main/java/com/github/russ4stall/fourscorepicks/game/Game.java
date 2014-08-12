@@ -1,6 +1,7 @@
 package com.github.russ4stall.fourscorepicks.game;
 
-import javax.persistence.Basic;
+import com.github.russ4stall.fourscorepicks.Team.Team;
+
 import javax.persistence.Entity;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
