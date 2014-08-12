@@ -1,4 +1,4 @@
-package com.github.russ4stall.fourscorepicks.game;
+package com.github.russ4stall.fourscorepicks.Team;
 
 /**
  * Date: 7/19/13
