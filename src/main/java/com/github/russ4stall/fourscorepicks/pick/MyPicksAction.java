@@ -14,6 +14,8 @@ import com.github.russ4stall.fourscorepicks.user.UserScoreCalculator;
 import com.github.russ4stall.fourscorepicks.user.UserScoreCalculatorImpl;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.Validateable;
+import com.opensymphony.xwork2.ValidationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
     private Integer gameId;
     WeekCalculator weekCalculator = new WeekCalculator();
 
+    private Boolean picksUpdated;
+
 
     @Override
     public void prepare() throws Exception {
@@ -69,12 +73,36 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
         return INPUT;
     }
 
+    @Override
+    public void validate() {
+        //if gameId is not null, that means a user is attempting
+        // to delete their hot game pick
+        if (gameId == null) {
+            if (picks == null) {
+                addActionError("ERROR: Nothing was selected!...Dummy.");
+                return;
+            }
+            for (Game game : gameList) {
+                if (picks.get(game.getId()) != null && game.isGameHasStarted()) {
+                    addActionError("ERROR: One or more of your picks were not saved. <br/>Reason: Game has already started");
+                    return;
+                }
+            }
+        }
+
+    }
+
     public String execute() {
 
         List<Pick> pickList = new ArrayList<Pick>();
         if (picks != null) {
             for (Game game : gameList) {
                 if (picks.get(game.getId()) != null) {
+                    if(game.isGameHasStarted()){
+                        addActionError("One or more of your picks were not saved. <br/>Reason: Game has already started");
+                        return INPUT;
+                    }
+
                     Pick pick = new Pick();
                     pick.setGameId(game.getId());
                     pick.setUserId(user.getId());
@@ -85,11 +113,20 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
             PickDao pickDao = new PickDaoImpl();
             pickDao.setPicks(pickList);
         }
+        picksUpdated = true;
         return SUCCESS;
     }
 
     public String deletePick() {
+
         if(gameId!=null){
+            for (Game game : gameList) {
+                if (gameId == game.getId() && game.isGameHasStarted()) {
+                    addActionError("ERROR: Game has already started.");
+                    return input();
+                }
+            }
+            picksUpdated = true;
         pickDao.deletePick(user.getId(), gameId);
         }
 
@@ -137,5 +174,13 @@ public class MyPicksAction extends ActionSupport implements SessionAware, Prepar
 
     public List getWeekUserResultList() {
         return weekUserResultList;
+    }
+
+    public Boolean getPicksUpdated() {
+        return picksUpdated;
+    }
+
+    public void setPicksUpdated(Boolean picksUpdated) {
+        this.picksUpdated = picksUpdated;
     }
 }

@@ -277,6 +277,29 @@ body {
     color: red;
 }
 
+
+.action-errors {
+    color: red;
+    background-color: lightpink;
+    border-radius: 3px;
+    border: 1px solid red;
+    text-align: left;
+    padding:10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.action-messages {
+    color: green;
+    background-color: lightgreen;
+    border-radius: 3px;
+    border: 1px solid green;
+    text-align: left;
+    padding:10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
 #work_bench {
     color: white;
 }

@@ -43,6 +43,18 @@
                 </ul>
 
             </div>
+            <c:if test="${not empty action.actionErrors}">
+                <div class="action-errors">
+                    <c:forEach items="${action.actionErrors}" var="error">
+                        <span>${error}</span>
+                    </c:forEach>
+                </div>
+            </c:if>
+            <c:if test="${action.picksUpdated}">
+                <div class="action-messages">
+                        <span>INFO: Picks successfully updated!</span>
+                </div>
+            </c:if>
             <form action="${pageContext.request.contextPath}/mypicks!execute" method="post">
                 <table>
                     <tr>
