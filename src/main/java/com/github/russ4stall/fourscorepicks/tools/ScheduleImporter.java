@@ -4,20 +4,15 @@ import au.com.bytecode.opencsv.CSVReader;
 import com.github.russ4stall.fourscorepicks.Team.Team;
 import com.github.russ4stall.fourscorepicks.Team.TeamDao;
 import com.github.russ4stall.fourscorepicks.Team.TeamDaoImpl;
-import com.github.russ4stall.fourscorepicks.game.Game;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDao;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDaoImpl;
 import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
-import org.joda.time.format.DateTimePrinter;
 
 import java.io.FileReader;
 import java.io.IOException;
 
-import java.io.Writer;
-import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -55,8 +50,5 @@ public class ScheduleImporter {
             }
 
         }
-
-
-
     }
 }

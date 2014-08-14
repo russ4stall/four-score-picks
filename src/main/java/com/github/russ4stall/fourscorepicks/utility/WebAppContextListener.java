@@ -30,6 +30,7 @@ public class WebAppContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         Flyway flyway = new Flyway();
         flyway.setDataSource("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
+        flyway.setValidateOnMigrate(false);
         flyway.migrate();
 
         try {
