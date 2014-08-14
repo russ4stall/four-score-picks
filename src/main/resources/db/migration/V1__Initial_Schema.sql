@@ -29,7 +29,8 @@ CREATE TABLE team (
 CREATE TABLE pick (
   user_id int NOT NULL,
   game_id int NOT NULL,
-  pick int NOT NULL
+  pick int NOT NULL,
+  PRIMARY KEY (user_id,game_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE news (

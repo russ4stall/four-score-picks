@@ -65,6 +65,7 @@
             <result name="success" type="redirectAction">
                 <param name="namespace">/</param>
                 <param name="actionName">mypicks</param>
+                <param name="picksUpdated">${picksUpdated}</param>
             </result>
         </action>
 
