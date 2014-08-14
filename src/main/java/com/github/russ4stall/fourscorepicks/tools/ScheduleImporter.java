@@ -44,11 +44,12 @@ public class ScheduleImporter {
                 DateTimeFormatter timestampFormatter = DateTimeFormat.forPattern("yyyy-M-d HH:mm:ss");
 
                 gameDao.addGame(awayTeam.getId(), homeTeam.getId(), Integer.valueOf(nextLine[0]), dateTime.toString(timestampFormatter));
-
+                System.out.println(awayTeam.getId() + " " + homeTeam.getId() + " " + Integer.valueOf(nextLine[0]) + " " + dateTime.toString(timestampFormatter) + " was added to the database");
             } else {
                 System.out.println("Error : String (Team Location+Name)from CSV doesn't have a match from the map of teams!");
             }
 
         }
+        System.out.println("*****IMPORT COMPLETE*****");
     }
 }
