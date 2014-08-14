@@ -11,6 +11,13 @@ import org.joda.time.Weeks;
  * Date: 7/24/13
  * Time: 2:08 PM
  *
+ * This calculates and returns the current week of the season.
+ *
+ * To test how the app will behave at different points in time, change the value
+ * of 'timeToTest' to the date you want to test.
+ *
+ * If the current date is anytime before the end of week 1, this will always return 1.
+ *
  * @author Russ Forstall
  */
 public class WeekCalculator {
@@ -19,26 +26,28 @@ public class WeekCalculator {
     private DateTime timeToTest;
 
     public WeekCalculator() {
-      //this.timeToTest = new DateTime(2013, 9,10,0,0,0,0);
-        this.timeToTest = DateTime.now();
+        //This value represents the date the app thinks it is.
+        //FOR TESTING PURPOSES: set this value to any date and the app will behave like it is that date
+        //todo: FOR PRODUCTION: this value should be set to (DateTime.now())
+        this.timeToTest = new DateTime(2014, 9,9,0,0,0,0);
+        //this.timeToTest = DateTime.now();
     }
 
     public WeekCalculator(DateTime timeToTest) {
         this.timeToTest = timeToTest;
     }
 
-    //todo at start of season, change to return weekOfSeason
+
     public int getWeekOfSeason() {
-        //rf: this is the actual start of the season
-        //DateTime startOfSeasonDate = new DateTime(2014, 8, 27, 0, 0, 0, 0);
-        DateTime startOfSeasonDate = new DateTime(2014, 7, 27, 0, 0, 0, 0);
+        //rf: this is the tuesday of the week before the start of the season
+        DateTime startOfSeasonDate = new DateTime(2014, 8, 26, 0, 0, 0, 0);
 
         Instant startOfSeasonInstant = new Instant(startOfSeasonDate);
         Weeks weekOfSeason = Weeks.weeksBetween(startOfSeasonInstant, timeToTest);
 
-       //DateTime weekOneEnd = new DateTime(2014, 9,10,0,0,0,0);
-       DateTime weekOneEnd = new DateTime(2014, 8,11,0,0,0,0);
+       DateTime weekOneEnd = new DateTime(2014, 9,9,0,0,0,0);
 
+        //Anytime before week 2 starts, return 1
         if(weekOneEnd.isAfter(timeToTest)){
             return 1;
         }
