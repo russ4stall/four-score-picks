@@ -1,6 +1,5 @@
 package com.github.russ4stall.fourscorepicks.utility;
 
-import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.score.ScoreDao;
 import com.github.russ4stall.fourscorepicks.score.ScoreDaoImpl;
 import com.github.russ4stall.fourscorepicks.user.User;

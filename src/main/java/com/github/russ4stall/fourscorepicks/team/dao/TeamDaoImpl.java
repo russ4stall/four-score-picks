@@ -1,6 +1,6 @@
-package com.github.russ4stall.fourscorepicks.Team;
+package com.github.russ4stall.fourscorepicks.team.dao;
 
-import com.github.russ4stall.fourscorepicks.user.User;
+import com.github.russ4stall.fourscorepicks.team.Team;
 import com.github.russ4stall.fourscorepicks.utility.SqlUtilities;
 
 import java.sql.*;

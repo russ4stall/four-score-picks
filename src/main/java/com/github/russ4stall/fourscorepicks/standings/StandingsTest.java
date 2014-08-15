@@ -1,11 +1,9 @@
 package com.github.russ4stall.fourscorepicks.standings;
 
-import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
-import com.github.russ4stall.fourscorepicks.standings.Roster;
+import com.github.russ4stall.fourscorepicks.utility.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.user.User;
 import com.github.russ4stall.fourscorepicks.user.dao.UserDao;
 import com.github.russ4stall.fourscorepicks.user.dao.UserDaoImpl;
-import com.google.common.base.Stopwatch;
 
 import java.util.ArrayList;
 import java.util.List;

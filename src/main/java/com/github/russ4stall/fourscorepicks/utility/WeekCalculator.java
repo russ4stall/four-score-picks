@@ -1,4 +1,4 @@
-package com.github.russ4stall.fourscorepicks.game;
+package com.github.russ4stall.fourscorepicks.utility;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

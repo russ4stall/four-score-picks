@@ -30,6 +30,7 @@ public class WebAppContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+
         Flyway flyway = new Flyway();
         flyway.setDataSource("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
         flyway.setValidateOnMigrate(false);
@@ -55,9 +56,6 @@ public class WebAppContextListener implements ServletContextListener {
                     //.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.MONDAY, 15, 52))
                     .withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.THURSDAY, 15, 0))
                     .build();
-
-
-
 
             scheduler.scheduleJob(emailJobDetail, emailTrigger);
 

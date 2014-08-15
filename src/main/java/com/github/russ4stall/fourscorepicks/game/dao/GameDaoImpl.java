@@ -1,7 +1,7 @@
 package com.github.russ4stall.fourscorepicks.game.dao;
 
 import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.Team.Team;
+import com.github.russ4stall.fourscorepicks.team.Team;
 import com.github.russ4stall.fourscorepicks.utility.SqlUtilities;
 
 import java.sql.*;
@@ -81,7 +81,7 @@ public class GameDaoImpl implements GameDao {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
 
             preparedStatement = connection.prepareStatement("SELECT g.*, hg.game_id AS hot_game, " +
-                    "t1.name AS `away_team`, t2.name AS `home_team`, r.*, t3.name AS `winner_name` " +
+                    "t1.name AS away_team, t2.name AS home_team, r.*, t3.name AS winner_name " +
                     "FROM game g " +
                     "LEFT OUTER JOIN result r ON r.game_id=g.id " +
                     "JOIN team t1 ON t1.id=g.away_team " +

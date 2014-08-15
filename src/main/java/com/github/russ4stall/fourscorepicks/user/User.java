@@ -1,9 +1,7 @@
 package com.github.russ4stall.fourscorepicks.user;
 
-import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
+import com.github.russ4stall.fourscorepicks.utility.WeekCalculator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

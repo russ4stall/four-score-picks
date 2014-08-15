@@ -1,6 +1,15 @@
 package com.github.russ4stall.fourscorepicks.tools;
 
+import com.github.russ4stall.fourscorepicks.game.Game;
+import com.github.russ4stall.fourscorepicks.team.TeamEnum;
+import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 /**
+ * This object is the product of scraping the NFL website for scores.
+ *
  * Created by russ on 8/14/14.
  */
 public class RawScrapedGame {
@@ -21,6 +30,42 @@ public class RawScrapedGame {
                 ", homeTeamScore='" + homeTeamScore + '\'' +
                 '}';
     }
+
+    /**
+     * This compares a raw scraped game with an existing game.
+     * For validating that scraped scores belong to the right game.
+     *
+     * @param game
+     * @return true if they are referring to the same actual game.
+     */
+    public boolean equals(Game game) {
+        //Do away teams match?
+        if (TeamEnum.valueOf(this.getAwayTeam().toUpperCase()).toTeam() != game.getAwayTeam()) {
+            return false;
+        //Do home teams match?
+        } else if (TeamEnum.valueOf(this.getHomeTeam().toUpperCase()).toTeam() != game.getHomeTeam()) {
+            return false;
+        }
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("EEE, MMM d");
+        DateTime rawDateTime = DateTime.parse(this.getDate(), formatter);
+
+
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd H:mm:ss");
+        DateTime dateTime = DateTime.parse("2014-09-07 13:00:00", dateTimeFormatter);
+        System.out.println(dateTime);
+
+
+
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("EEE, MMM d");
+        DateTime rawDateTime = DateTime.parse("Sun, Sep 7", formatter);
+        System.out.println(rawDateTime.toString(formatter));
+    }
+
 
     public String getDate() {
         return date;

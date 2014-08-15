@@ -1,11 +1,9 @@
 package com.github.russ4stall.fourscorepicks.pick;
 
 import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
+import com.github.russ4stall.fourscorepicks.utility.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDao;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDaoImpl;
-import com.github.russ4stall.fourscorepicks.pick.GameAndPick;
-import com.github.russ4stall.fourscorepicks.pick.Pick;
 import com.github.russ4stall.fourscorepicks.pick.dao.PickDao;
 import com.github.russ4stall.fourscorepicks.pick.dao.PickDaoImpl;
 import com.github.russ4stall.fourscorepicks.user.RosterFactory;
@@ -14,16 +12,11 @@ import com.github.russ4stall.fourscorepicks.user.UserScoreCalculator;
 import com.github.russ4stall.fourscorepicks.user.UserScoreCalculatorImpl;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
-import com.opensymphony.xwork2.Validateable;
-import com.opensymphony.xwork2.ValidationAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Date: 7/19/13

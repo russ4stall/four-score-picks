@@ -1,9 +1,8 @@
-package com.github.russ4stall.fourscorepicks.game;
+package com.github.russ4stall.fourscorepicks.utility;
 
 import com.google.common.collect.ImmutableList;
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

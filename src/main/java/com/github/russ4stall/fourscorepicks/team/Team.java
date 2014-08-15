@@ -1,4 +1,4 @@
-package com.github.russ4stall.fourscorepicks.Team;
+package com.github.russ4stall.fourscorepicks.team;
 
 /**
  * Date: 7/19/13
@@ -18,6 +18,10 @@ public class Team {
         this.id = id;
         this.location = location;
         this.name = name;
+    }
+
+    public static Team valueOf(String s) {
+        return TeamEnum.getEnum(s).toTeam();
     }
 
     public int getId() {

@@ -20,7 +20,19 @@ public class ScoreScraper {
     private int weekNumber;
     private SeasonSection seasonSection = SeasonSection.REG;
 
-    public List<RawScrapedGame> getScores() {
+
+
+    public ScoreScraper(int weekNumber) {
+        this.weekNumber = weekNumber;
+    }
+
+    public ScoreScraper(int year, int weekNumber, SeasonSection seasonSection) {
+        this.year = year;
+        this.weekNumber = weekNumber;
+        this.seasonSection = seasonSection;
+    }
+
+    public List<RawScrapedGame> scrapeWeekScores() {
 
         String url = "http://www.nfl.com/scores/" + year + "/" + seasonSection + weekNumber;
 
@@ -66,10 +78,9 @@ public class ScoreScraper {
 
     //test
     public static void main(String[] args) {
-        ScoreScraper scoreScraper = new ScoreScraper();
-        scoreScraper.setWeekNumber(1);
+        ScoreScraper scoreScraper = new ScoreScraper(1);
 
-        for (RawScrapedGame game : scoreScraper.getScores()) {
+        for (RawScrapedGame game : scoreScraper.scrapeWeekScores()) {
             System.out.println(game);
         }
     }

@@ -3,7 +3,7 @@ package com.github.russ4stall.fourscorepicks.admin;
 import com.github.russ4stall.fourscorepicks.content.dao.ContentDao;
 import com.github.russ4stall.fourscorepicks.content.dao.ContentDaoImpl;
 import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.game.WeekCalculator;
+import com.github.russ4stall.fourscorepicks.utility.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDao;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDaoImpl;
 import com.github.russ4stall.fourscorepicks.user.RosterFactory;
@@ -15,9 +15,7 @@ import com.opensymphony.xwork2.Preparable;
 import org.apache.struts2.interceptor.SessionAware;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 

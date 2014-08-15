@@ -1,12 +1,11 @@
 package com.github.russ4stall.fourscorepicks.tools;
 
 import au.com.bytecode.opencsv.CSVReader;
-import com.github.russ4stall.fourscorepicks.Team.Team;
-import com.github.russ4stall.fourscorepicks.Team.TeamDao;
-import com.github.russ4stall.fourscorepicks.Team.TeamDaoImpl;
+import com.github.russ4stall.fourscorepicks.team.Team;
+import com.github.russ4stall.fourscorepicks.team.dao.TeamDao;
+import com.github.russ4stall.fourscorepicks.team.dao.TeamDaoImpl;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDao;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDaoImpl;
-import org.apache.struts2.util.ServletContextAware;
 import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -61,7 +60,7 @@ public class ScheduleImporterTask {
                 gameDao.addGame(awayTeam.getId(), homeTeam.getId(), Integer.valueOf(nextLine[0]), dateTime.toString(timestampFormatter));
                 System.out.println(awayTeam.getId() + " " + homeTeam.getId() + " " + Integer.valueOf(nextLine[0]) + " " + dateTime.toString(timestampFormatter) + " was added to the database");
             } else {
-                System.out.println("Error : String (Team Location+Name)from CSV doesn't have a match from the map of teams!");
+                System.out.println("Error : String (team Location+Name)from CSV doesn't have a match from the map of teams!");
             }
 
         }

@@ -1,7 +1,7 @@
 package com.github.russ4stall.fourscorepicks.pick.dao;
 
 import com.github.russ4stall.fourscorepicks.game.Game;
-import com.github.russ4stall.fourscorepicks.Team.Team;
+import com.github.russ4stall.fourscorepicks.team.Team;
 import com.github.russ4stall.fourscorepicks.pick.GameAndPick;
 import com.github.russ4stall.fourscorepicks.pick.Pick;
 import com.github.russ4stall.fourscorepicks.utility.SqlUtilities;
@@ -137,8 +137,8 @@ public class PickDaoImpl implements PickDao {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
 
 
-            preparedStatement = connection.prepareStatement("SELECT g.*, p.*, hg.game_id AS hot_game, t1.name AS `away_team`, t2.name AS `home_team`, " +
-                    "t3.name AS `pick_name`, r.*, t4.name AS `winner_name` " +
+            preparedStatement = connection.prepareStatement("SELECT g.*, p.*, hg.game_id AS hot_game, t1.name AS away_team, t2.name AS home_team, " +
+                    "t3.name AS pick_name, r.*, t4.name AS winner_name " +
                     "FROM game g " +
                     "LEFT OUTER JOIN result r ON r.game_id=g.id " +
                     "LEFT OUTER JOIN team t4 ON t4.id=r.winner_id " +
@@ -215,8 +215,8 @@ public class PickDaoImpl implements PickDao {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
 
 
-            preparedStatement = connection.prepareStatement("SELECT g.*, p.*, hg.game_id AS hot_game, t1.name AS `away_team`, t2.name AS `home_team`, " +
-                    "t3.name AS `pick_name`, r.*, t4.name AS `winner_name` " +
+            preparedStatement = connection.prepareStatement("SELECT g.*, p.*, hg.game_id AS hot_game, t1.name AS away_team, t2.name AS home_team, " +
+                    "t3.name AS pick_name, r.*, t4.name AS winner_name " +
                     "FROM game g " +
                     "LEFT OUTER JOIN result r ON r.game_id=g.id " +
                     "LEFT OUTER JOIN team t4 ON t4.id=r.winner_id " +

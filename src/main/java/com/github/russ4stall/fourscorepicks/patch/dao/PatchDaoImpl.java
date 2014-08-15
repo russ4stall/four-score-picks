@@ -1,12 +1,9 @@
 package com.github.russ4stall.fourscorepicks.patch.dao;
 
-import com.github.russ4stall.fourscorepicks.Team.Team;
-import com.github.russ4stall.fourscorepicks.game.Game;
 import com.github.russ4stall.fourscorepicks.utility.SqlUtilities;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

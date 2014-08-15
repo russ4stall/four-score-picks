@@ -1,4 +1,6 @@
-package com.github.russ4stall.fourscorepicks.Team;
+package com.github.russ4stall.fourscorepicks.team.dao;
+
+import com.github.russ4stall.fourscorepicks.team.Team;
 
 import java.util.List;
 
