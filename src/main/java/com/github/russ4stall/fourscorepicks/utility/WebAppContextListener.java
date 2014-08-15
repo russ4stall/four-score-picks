@@ -1,5 +1,6 @@
 package com.github.russ4stall.fourscorepicks.utility;
 
+import com.github.russ4stall.fourscorepicks.patch.PatchRunner;
 import org.flywaydb.core.Flyway;
 import org.quartz.*;
 import org.quartz.TriggerBuilder.*;
@@ -8,6 +9,7 @@ import org.quartz.SimpleScheduleBuilder.*;
 
 import org.quartz.impl.StdSchedulerFactory;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -32,6 +34,12 @@ public class WebAppContextListener implements ServletContextListener {
         flyway.setDataSource("jdbc:mysql://localhost:3306/fourscorepicks", "fourscorepicks", "fourscorepicks");
         flyway.setValidateOnMigrate(false);
         flyway.migrate();
+
+
+        PatchRunner patchRunner = new PatchRunner();
+        patchRunner.setServletContext(sce.getServletContext());
+        patchRunner.runPatches();
+
 
         try {
             scheduler = StdSchedulerFactory.getDefaultScheduler();
