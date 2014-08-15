@@ -54,6 +54,7 @@ public class ScoreScraper {
             rawScrapedGame.setAwayTeamScore(scoreboxWrapper.getElementsByClass("away-team").first().getElementsByClass("total-score").first().text());
             rawScrapedGame.setHomeTeam(scoreboxWrapper.getElementsByClass("home-team").first().getElementsByClass("team-name").first().text());
             rawScrapedGame.setHomeTeamScore(scoreboxWrapper.getElementsByClass("home-team").first().getElementsByClass("total-score").first().text());
+            rawScrapedGame.setTime(scoreboxWrapper.getElementsByClass("time-left").text());
 
             rawScrapedGames.add(rawScrapedGame);
         }

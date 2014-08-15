@@ -14,6 +14,7 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class RawScrapedGame {
     String date;
+    String time;
     String awayTeam;
     String homeTeam;
     String awayTeamScore;
@@ -24,6 +25,7 @@ public class RawScrapedGame {
     public String toString() {
         return "RawScrapedGame{" +
                 "date='" + date + '\'' +
+                ", time='" + time + '\'' +
                 ", awayTeam='" + awayTeam + '\'' +
                 ", homeTeam='" + homeTeam + '\'' +
                 ", awayTeamScore='" + awayTeamScore + '\'' +
@@ -73,6 +75,14 @@ public class RawScrapedGame {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getAwayTeam() {
