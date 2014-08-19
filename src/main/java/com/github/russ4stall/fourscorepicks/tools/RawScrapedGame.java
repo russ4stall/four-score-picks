@@ -13,6 +13,7 @@ import org.joda.time.format.DateTimeFormatter;
  * Created by russ on 8/14/14.
  */
 public class RawScrapedGame {
+    int week;
     String date;
     String time;
     String awayTeam;
@@ -24,7 +25,8 @@ public class RawScrapedGame {
     @Override
     public String toString() {
         return "RawScrapedGame{" +
-                "date='" + date + '\'' +
+                "week=" + week +
+                ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", awayTeam='" + awayTeam + '\'' +
                 ", homeTeam='" + homeTeam + '\'' +
@@ -33,6 +35,7 @@ public class RawScrapedGame {
                 '}';
     }
 
+
     /**
      * This compares a raw scraped game with an existing game.
      * For validating that scraped scores belong to the right game.
@@ -40,18 +43,16 @@ public class RawScrapedGame {
      * @param game
      * @return true if they are referring to the same actual game.
      */
-    public boolean equals(Game game) {
+    public boolean matches(Game game) {
         //Do away teams match?
-        if (TeamEnum.valueOf(this.getAwayTeam().toUpperCase()).toTeam() != game.getAwayTeam()) {
+        if (TeamEnum.getEnum(this.awayTeam) != TeamEnum.getEnum(game.getAwayTeam().getName()))
             return false;
         //Do home teams match?
-        } else if (TeamEnum.valueOf(this.getHomeTeam().toUpperCase()).toTeam() != game.getHomeTeam()) {
+        if (TeamEnum.getEnum(this.homeTeam) != TeamEnum.getEnum(game.getHomeTeam().getName()))
             return false;
-        }
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("EEE, MMM d");
-        DateTime rawDateTime = DateTime.parse(this.getDate(), formatter);
-
-
+        //Do week numbers match?
+        if (game.getWeek() != this.week)
+            return false;
 
         return true;
     }
@@ -61,13 +62,18 @@ public class RawScrapedGame {
         DateTime dateTime = DateTime.parse("2014-09-07 13:00:00", dateTimeFormatter);
         System.out.println(dateTime);
 
-
-
         DateTimeFormatter formatter = DateTimeFormat.forPattern("EEE, MMM d");
         DateTime rawDateTime = DateTime.parse("Sun, Sep 7", formatter);
         System.out.println(rawDateTime.toString(formatter));
     }
 
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
 
     public String getDate() {
         return date;

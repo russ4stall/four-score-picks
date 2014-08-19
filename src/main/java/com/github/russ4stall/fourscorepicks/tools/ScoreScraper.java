@@ -55,6 +55,7 @@ public class ScoreScraper {
             rawScrapedGame.setHomeTeam(scoreboxWrapper.getElementsByClass("home-team").first().getElementsByClass("team-name").first().text());
             rawScrapedGame.setHomeTeamScore(scoreboxWrapper.getElementsByClass("home-team").first().getElementsByClass("total-score").first().text());
             rawScrapedGame.setTime(scoreboxWrapper.getElementsByClass("time-left").text());
+            rawScrapedGame.setWeek(weekNumber);
 
             rawScrapedGames.add(rawScrapedGame);
         }

@@ -32,14 +32,25 @@ public class ScrapeWeeklyNFLScoresTask {
 
 
         for (RawScrapedGame scrapedGame : rawScrapedGames) {
-            Game candidate = new Game();
-            candidate.setAwayTeam(Team.valueOf(scrapedGame.getAwayTeam()));
-            candidate.setHomeTeam(Team.valueOf(scrapedGame.getHomeTeam()));
+            for (Game game : games) {
+                if (scrapedGame.matches(game)) {
+                    Game g = game;
+                    try {
+                        g.setAwayTeamScore(Integer.valueOf(scrapedGame.getAwayTeamScore()));
+                    } catch (Exception e) {
+                        System.out.println(e.getLocalizedMessage());
+                    }
+                    try {
+                        g.setHomeTeamScore(Integer.valueOf(scrapedGame.getHomeTeamScore()));
+                    } catch (Exception e) {
+                        System.out.println(e.getLocalizedMessage());
+                    }
 
-            System.out.println(scrapedGame);
+                    System.out.println(game);
+                    break;
+                }
+            }
         }
-
-
     }
 
     public void setWeekNumber(Integer weekNumber) {
