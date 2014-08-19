@@ -1,9 +1,10 @@
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="fsp" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
+    <fsp:head/>
     <title>FourScorePicks</title>
 </head>
 <body>
