@@ -7,8 +7,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
-    <title>FourScorePicks</title>
+    <fsp:head/>
 </head>
 <body>
 <div id="banner">FOUR SCORE PICKS</div>

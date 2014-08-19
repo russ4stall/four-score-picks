@@ -3,7 +3,7 @@
 <html>
 <head>
 
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/fourscorestyles.css">
+    <fsp:head/>
     <title>FourScorePicks</title>
 </head>
 <body>
