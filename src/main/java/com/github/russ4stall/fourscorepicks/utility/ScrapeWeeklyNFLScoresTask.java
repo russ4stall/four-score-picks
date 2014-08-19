@@ -44,6 +44,7 @@ public class ScrapeWeeklyNFLScoresTask {
                         g.setHomeTeamScore(Integer.valueOf(scrapedGame.getHomeTeamScore()));
                     } catch (Exception e) {
                         System.out.println(e.getLocalizedMessage());
+
                     }
 
                     System.out.println(game);

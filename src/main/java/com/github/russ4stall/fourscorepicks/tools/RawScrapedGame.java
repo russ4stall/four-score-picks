@@ -57,16 +57,6 @@ public class RawScrapedGame {
         return true;
     }
 
-    public static void main(String[] args) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd H:mm:ss");
-        DateTime dateTime = DateTime.parse("2014-09-07 13:00:00", dateTimeFormatter);
-        System.out.println(dateTime);
-
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("EEE, MMM d");
-        DateTime rawDateTime = DateTime.parse("Sun, Sep 7", formatter);
-        System.out.println(rawDateTime.toString(formatter));
-    }
-
     public int getWeek() {
         return week;
     }
