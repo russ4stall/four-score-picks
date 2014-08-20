@@ -16,7 +16,7 @@ import org.joda.time.Weeks;
  * To test how the app will behave at different points in time, change the value
  * of 'timeToTest' to the date you want to test.
  *
- * If the current date is anytime before the end of week 1, this will always return 1.
+ * If the current date is anytime before the end of week 1, this will return 1.
  *
  * @author Russ Forstall
  */
@@ -54,6 +54,10 @@ public class WeekCalculator {
 
         return weekOfSeason.getWeeks();
 
+    }
+
+    public int getYear() {
+        return 2014;
     }
 
     public int getPreviousWeekOfSeason() {

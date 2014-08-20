@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ScoreScraper {
 
-    private int year = 2014;
+    private int year;
     private int weekNumber;
     private SeasonSection seasonSection = SeasonSection.REG;
 
@@ -24,6 +24,11 @@ public class ScoreScraper {
 
     public ScoreScraper(int weekNumber) {
         this.weekNumber = weekNumber;
+    }
+
+    public ScoreScraper(int weekNumber, int year) {
+        this.weekNumber = weekNumber;
+        this.year = year;
     }
 
     public ScoreScraper(int year, int weekNumber, SeasonSection seasonSection) {

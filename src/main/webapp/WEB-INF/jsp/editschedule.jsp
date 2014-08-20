@@ -20,7 +20,7 @@
     <h1>Administrator Tools</h1>
 
     <div id="work_bench">
-
+        <a class="admin_link" href="${pageContext.request.contextPath}/editSchedule!scrapeScores" >import this weeks scores</a>
 
         <div id="new_game_tool">
             <span class="tool_title">Add a Game</span><br>

@@ -17,17 +17,22 @@ import java.util.List;
  */
 public class ScrapeWeeklyNFLScoresTask {
     private Integer weekNumber = null;
+    private Integer year = null;
 
     public void execute() {
+        WeekCalculator weekCalculator = new WeekCalculator();
         if (weekNumber == null) {
-            WeekCalculator weekCalculator = new WeekCalculator();
             weekNumber = weekCalculator.getWeekOfSeason();
+        }
+
+        if (year == null) {
+            year = weekCalculator.getYear();
         }
 
         GameDao gameDao = new GameDaoImpl();
         List<Game> games = gameDao.getGamesByWeek(weekNumber);
 
-        ScoreScraper scoreScraper = new ScoreScraper(weekNumber);
+        ScoreScraper scoreScraper = new ScoreScraper(weekNumber, year);
         List<RawScrapedGame> rawScrapedGames = scoreScraper.scrapeWeekScores();
 
 
@@ -45,15 +50,19 @@ public class ScrapeWeeklyNFLScoresTask {
                     }
 
                     if (hasScores) {
-
+                        //calculate winner and set the winning team
                         if (g.getHomeTeamScore() > g.getAwayTeamScore()) {
                             g.setWinningTeam(g.getHomeTeam());
                         } else if (g.getHomeTeamScore() < g.getAwayTeamScore()) {
                             g.setWinningTeam(g.getAwayTeam());
                         }
                         gameDao.setResult(g);
+                        System.out.println("Imported scores for game: " + g.getAwayTeam().getName() + " vs " + g.getHomeTeam().getName());
+                    } else {
+                        System.out.println("Scraper Warning: Scores aren't available for game: (wk" + weekNumber +") " + g.getAwayTeam().getName() + " vs " + g.getHomeTeam().getName());
                     }
-                    System.out.println(g);
+                    //System.out.println(g);
+
                     break;
                 }
             }
@@ -62,6 +71,10 @@ public class ScrapeWeeklyNFLScoresTask {
 
     public void setWeekNumber(Integer weekNumber) {
         this.weekNumber = weekNumber;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public static void main(String[] args) {

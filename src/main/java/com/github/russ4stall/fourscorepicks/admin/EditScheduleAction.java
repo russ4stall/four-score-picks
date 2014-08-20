@@ -2,6 +2,7 @@ package com.github.russ4stall.fourscorepicks.admin;
 
 import com.github.russ4stall.fourscorepicks.game.Game;
 import com.github.russ4stall.fourscorepicks.team.Team;
+import com.github.russ4stall.fourscorepicks.utility.ScrapeWeeklyNFLScoresTask;
 import com.github.russ4stall.fourscorepicks.utility.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDao;
 import com.github.russ4stall.fourscorepicks.game.dao.GameDaoImpl;
@@ -110,6 +111,13 @@ public class EditScheduleAction extends ActionSupport implements SessionAware, P
         if (user != null && user.isAdmin()) {
             gameDao.removeHotGame(weekNumHotGame, gameIdHotGame);
         }
+
+        return SUCCESS;
+    }
+
+    public String scrapeScores() {
+        ScrapeWeeklyNFLScoresTask task = new ScrapeWeeklyNFLScoresTask();
+        task.execute();
 
         return SUCCESS;
     }
