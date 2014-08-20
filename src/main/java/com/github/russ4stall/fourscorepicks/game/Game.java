@@ -28,6 +28,23 @@ public class Game {
     private boolean gameHasStarted;
 
 
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", homeTeam=" + homeTeam +
+                ", awayTeam=" + awayTeam +
+                ", date='" + date + '\'' +
+                ", gameTime=" + gameTime +
+                ", week=" + week +
+                ", homeTeamScore=" + homeTeamScore +
+                ", awayTeamScore=" + awayTeamScore +
+                ", winningTeam=" + winningTeam +
+                ", isHotGame=" + isHotGame +
+                ", gameHasStarted=" + gameHasStarted +
+                '}';
+    }
+
     public boolean isGameHasStarted() {
         gameHasStarted = false;
         Date date = new Date();

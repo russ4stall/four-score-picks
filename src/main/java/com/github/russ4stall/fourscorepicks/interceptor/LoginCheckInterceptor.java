@@ -45,6 +45,9 @@ public class LoginCheckInterceptor extends AbstractInterceptor {
                     if (cookie.getName().equals("remember-me")){
                         Map<String, String> loginParameters = Splitter.on('&').withKeyValueSeparator('=').split(cookie.getValue());
                         UserDao userDao = new UserDaoImpl();
+                        if (!userDao.emailExistsCheck(loginParameters.get("email"))){
+                            return "login";
+                        }
                         user = userDao.loginUser(loginParameters.get("email"), loginParameters.get("password"));
                         if(!loginParameters.get("password").equals(user.getPassword())){
                             return "login";

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * Scrapes scores from nfl.com and updates the database
- *
+ * <p/>
  * Created by russ on 8/14/14.
  */
 public class ScrapeWeeklyNFLScoresTask {
@@ -28,18 +28,36 @@ public class ScrapeWeeklyNFLScoresTask {
         List<Game> games = gameDao.getGamesByWeek(weekNumber);
 
         ScoreScraper scoreScraper = new ScoreScraper(weekNumber);
-        List<RawScrapedGame> rawScrapedGames =  scoreScraper.scrapeWeekScores();
+        List<RawScrapedGame> rawScrapedGames = scoreScraper.scrapeWeekScores();
 
 
         for (RawScrapedGame scrapedGame : rawScrapedGames) {
-            Game candidate = new Game();
-            candidate.setAwayTeam(Team.valueOf(scrapedGame.getAwayTeam()));
-            candidate.setHomeTeam(Team.valueOf(scrapedGame.getHomeTeam()));
+            for (Game game : games) {
+                if (scrapedGame.matches(game)) {
+                    Game g = game;
+                    boolean hasScores = true;
+                    try {
+                        g.setAwayTeamScore(Integer.valueOf(scrapedGame.getAwayTeamScore()));
+                        g.setHomeTeamScore(Integer.valueOf(scrapedGame.getHomeTeamScore()));
+                    } catch (Exception e) {
+                        System.out.println(e.getLocalizedMessage());
+                        hasScores = false;
+                    }
 
-            System.out.println(scrapedGame);
+                    if (hasScores) {
+
+                        if (g.getHomeTeamScore() > g.getAwayTeamScore()) {
+                            g.setWinningTeam(g.getHomeTeam());
+                        } else if (g.getHomeTeamScore() < g.getAwayTeamScore()) {
+                            g.setWinningTeam(g.getAwayTeam());
+                        }
+                        gameDao.setResult(g);
+                    }
+                    System.out.println(g);
+                    break;
+                }
+            }
         }
-
-
     }
 
     public void setWeekNumber(Integer weekNumber) {
