@@ -26,7 +26,7 @@
         <a href="http://espn.go.com/nfl/picks" target="_blank">ESPN Expert Picks</a><br>
         <a href="http://www.nfl.com/injuries" target="_blank">NFL Injury Report</a><br>
         <a href="http://espn.go.com/nfl/schedule" target="_blank">Schedule</a><br>
-        <a href="http://www.espn.com" target="_blank">FourScorePress</a><br>
+        <a href="http://www.fourscorepress.com" target="_blank">FourScorePress</a><br>
         <br>
        <%-- <a href="${pageContext.request.contextPath}/trashTalk">Report a Bug!</a><br>--%>
 
