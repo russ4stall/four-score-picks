@@ -6,8 +6,6 @@
     <a class="links" href="${pageContext.request.contextPath}/home">Home</a>
     <a class="links" href="${pageContext.request.contextPath}/standings">Standings</a>
     <a class="links" href="${pageContext.request.contextPath}/mypicks">My Picks</a>
-    <a style="margin-top: -3px;" class="links" href="${pageContext.request.contextPath}/trashTalk">Trash Talk<sup> NEW</sup></a>
-    <%--<a class="links" href="${pageContext.request.contextPath}/contact">Contact</a>--%>
 
     <div id="logged_in_as">
         <c:if test="${sessionScope.user.admin}">

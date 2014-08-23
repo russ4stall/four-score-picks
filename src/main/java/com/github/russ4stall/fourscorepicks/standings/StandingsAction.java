@@ -1,5 +1,8 @@
 package com.github.russ4stall.fourscorepicks.standings;
 
+import com.github.russ4stall.fourscorepicks.content.Comment;
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDao;
+import com.github.russ4stall.fourscorepicks.content.dao.ContentDaoImpl;
 import com.github.russ4stall.fourscorepicks.utility.WeekCalculator;
 import com.github.russ4stall.fourscorepicks.user.User;
 import com.github.russ4stall.fourscorepicks.user.dao.UserDao;
@@ -18,12 +21,16 @@ import java.util.*;
  */
 public class StandingsAction extends ActionSupport {
 
-    private List<WeekStat> weekStats;
+    private WeekStat weekStat;
     private Roster seasonRoster;
+    private List<Comment> comments;
+    private String commentText;
+    private int userId;
 
     public String input(){
 
-        weekStats = new ArrayList<WeekStat>();
+        ContentDao contentDao = new ContentDaoImpl();
+        comments = contentDao.getCommentList();
 
         WeekCalculator weekCalculator = new WeekCalculator();
         int weekNum = weekCalculator.getWeekOfSeason();
@@ -37,25 +44,42 @@ public class StandingsAction extends ActionSupport {
         seasonRoster = new Roster(weekNum, users);
         seasonRoster.sortBySeasonScore();
 
-        for (int  i = weekNum; i>= 1; i--){
-            Roster tempWeekRoster = new Roster(i, new ArrayList<User>(users));
-            tempWeekRoster.sortByWeekScore();
+        Roster tempWeekRoster = new Roster(weekNum, new ArrayList<User>(users));
+        tempWeekRoster.sortByWeekScore();
 
-            Roster tempSeasonRoster = new Roster(i, new ArrayList<User>(users));
-            tempSeasonRoster.sortBySeasonScore();
+        Roster tempSeasonRoster = new Roster(weekNum, new ArrayList<User>(users));
+        tempSeasonRoster.sortBySeasonScore();
 
-            WeekStat weekStat = new WeekStat(i, tempWeekRoster, tempSeasonRoster);
-            weekStats.add(weekStat);
-        }
+        weekStat = new WeekStat(weekNum, tempWeekRoster, tempSeasonRoster);
+
 
         return INPUT;
+    }
+
+    public String addComment() {
+        ContentDao contentDao = new ContentDaoImpl();
+        contentDao.addComment(commentText, userId);
+
+        return SUCCESS;
     }
 
     public Roster getSeasonRoster() {
         return seasonRoster;
     }
 
-    public List<WeekStat> getWeekStats() {
-        return weekStats;
+    public WeekStat getWeekStat() {
+        return weekStat;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setCommentText(String commentText) {
+        this.commentText = commentText;
     }
 }

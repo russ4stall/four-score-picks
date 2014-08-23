@@ -47,10 +47,12 @@ public class ScoreScraper {
         } catch (IOException e) {
             System.out.println(e.getLocalizedMessage());
         }
-
-        Elements scoreboxWrappers = document.getElementsByClass("scorebox-wrapper");
-
         List<RawScrapedGame> rawScrapedGames = new ArrayList<RawScrapedGame>();
+
+        Elements scoreboxWrappers = null;
+        try {
+            scoreboxWrappers = document.getElementsByClass("scorebox-wrapper");
+
         for (Element scoreboxWrapper : scoreboxWrappers) {
             RawScrapedGame rawScrapedGame = new RawScrapedGame();
             rawScrapedGame.setDate(scoreboxWrapper.getElementsByClass("date").html());
@@ -64,7 +66,9 @@ public class ScoreScraper {
 
             rawScrapedGames.add(rawScrapedGame);
         }
-
+        } catch(Exception e) {
+            System.out.println(e.getLocalizedMessage());
+        }
 
 
 

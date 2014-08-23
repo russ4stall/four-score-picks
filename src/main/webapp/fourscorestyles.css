@@ -486,8 +486,6 @@ body {
     background-color: #181818;
     border: 6px ridge lightblue;
     box-shadow: 6px 6px 10px black;
-
-
 }
 
 #all_right div {
@@ -526,9 +524,7 @@ body {
 #week_standings_container{
     float:left;
     width: 300px;
-
 }
-
 
 .rank_row {
     width: 270px;
@@ -615,13 +611,12 @@ body {
 
 #comment_section {
     margin-top: 30px;
-
 }
 
 #comment_text_area {
     background-color: white;
     width: 414px;
-    height: 220px;
+    height: 80px;
     margin-bottom: 50px;
 }
 
@@ -644,7 +639,6 @@ body {
     border-bottom: 1px solid red;
     margin-left: 120px;
     margin-bottom: 20px;
-
 }
 
 #week_stats h2 {
