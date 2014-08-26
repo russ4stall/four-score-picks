@@ -54,7 +54,7 @@
 
         <action name="standings" class="com.github.russ4stall.fourscorepicks.standings.StandingsAction" method="input">
             <interceptor-ref name="newStack"/>
-            <result name="input">/WEB-INF/jsp/standings_copy.jsp</result>
+            <result name="input">/WEB-INF/jsp/standings.jsp</result>
         </action>
 
         <action name="addComment" class="com.github.russ4stall.fourscorepicks.standings.StandingsAction" method="addComment">
@@ -92,8 +92,6 @@
                 <param name="actionName">home</param>
             </result>
         </action>
-
-
 
         <action name="editNews" class="com.github.russ4stall.fourscorepicks.content.action.EditNewsAction" method="input">
             <interceptor-ref name="newStack"/>
