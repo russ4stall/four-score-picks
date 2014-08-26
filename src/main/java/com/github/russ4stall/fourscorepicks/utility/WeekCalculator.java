@@ -29,8 +29,8 @@ public class WeekCalculator {
         //This value represents the date the app thinks it is.
         //FOR TESTING PURPOSES: set this value to any date and the app will behave like it is that date
         //todo: FOR PRODUCTION: this value should be set to (DateTime.now())
-        this.timeToTest = new DateTime(2014, 9,9,0,0,0,0);
-        //this.timeToTest = DateTime.now();
+        //this.timeToTest = new DateTime(2014, 9,9,0,0,0,0);
+        this.timeToTest = DateTime.now();
     }
 
     public WeekCalculator(DateTime timeToTest) {
