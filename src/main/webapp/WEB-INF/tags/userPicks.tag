@@ -14,6 +14,9 @@
     <c:set var="pointsPossible" value="0"/>
     <c:set var="userScore" value="0"/>
 
+    ${pointsPossible}
+    ${userScore}
+
     <table>
         <tr>
             <th>Away</th>
@@ -92,7 +95,13 @@
         </c:if>
         </c:forEach>
     </table>
+
+    points possible: ${pointsPossible}<br/>
+    user score: ${userScore}<br/>
+
     <c:if test="${userScore >= pointsPossible && userScore > 0}">
+        points possible: ${pointsPossible}<br/>
+        user score: ${userScore}<br/>
         <div id="all_right">
             <c:set var="userScore" value="${userScore + 5}"/>
             <div>You got them all right! +5</div>
