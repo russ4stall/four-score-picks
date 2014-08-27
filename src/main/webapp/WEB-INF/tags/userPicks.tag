@@ -92,12 +92,13 @@
         </c:if>
         </c:forEach>
     </table>
-    <c:if test="${userScore >= pointsPossible}">
+    <c:if test="${userScore >= pointsPossible && userScore > 0}">
         <div id="all_right">
             <c:set var="userScore" value="${userScore + 5}"/>
             <div>You got them all right! +5</div>
         </div>
     </c:if>
+
     <div id="user_week_result_score">
         &nbsp &nbsp &nbsp Score for week ${userResultList[0].game.week}
         <div>${userScore}</div>
