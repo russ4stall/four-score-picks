@@ -21,10 +21,7 @@ import java.util.Map;
 
 import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -76,9 +73,7 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
         if(sendAsEmail){
             UserDao userDao = new UserDaoImpl();
             List<User> users = userDao.getUserList();
-            System.out.println("Send email to the following:");
             for (User recipients : users){
-                /*System.out.println(recipients.getEmail());*/
                 sendNewsEmail(recipients.getEmail());
             }
         }
@@ -88,14 +83,23 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
 
 
     private void sendNewsEmail(String userEmail){
-
         Properties props = new Properties();
-        props.put("mail.smtp.host", "192.168.2.41");
-        props.put("mail.smtp.port", "25");
-       /* props.put("mail.smtp.user", "forstallr@infinity-software.com");
-        props.put("mail.smtp.password", "fhSKMnqWRK_Y7OSeW5o2IQ");*/
+
+        final String host = "smtp.mandrillapp.com";
+        final String smtpUsername = "russ4stall@gmail.com";
+        final String password = "ACCGYGlUROzLTI7oVQJBsQ";
+
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.user", smtpUsername );
+        props.put("mail.smtp.password", password);
 
         Session session = Session.getDefaultInstance(props, null);
+
+        session.setPasswordAuthentication(new URLName("smtp", host, -1, null, smtpUsername, null),
+                new PasswordAuthentication(smtpUsername, password));
+
 
         String footer = "\n \n \n \nThis is an automated email. Do not respond to this address";
 
@@ -103,7 +107,7 @@ public class AdminAction extends ActionSupport implements SessionAware, Preparab
 
         try {
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("noreply@forstall.isd-testnet.com", "Four Score Picks"));
+            msg.setFrom(new InternetAddress("no-reply@fourscorepicks.com", "Four Score Picks"));
             msg.addRecipient(Message.RecipientType.TO,
                     new InternetAddress(userEmail));
             msg.setSubject("Four Score Picks: News Update!");

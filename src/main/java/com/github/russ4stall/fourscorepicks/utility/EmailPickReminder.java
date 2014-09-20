@@ -7,10 +7,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -19,52 +16,55 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Date: 9/30/13
- * Time: 1:57 PM
+ * This is a quartz job that sends an email reminder
+ * every Thursday afternoon.
+ *
+ * This implements mandrill as the SMTP server
  *
  * @author Russ Forstall
  */
 public class EmailPickReminder implements Job {
 
-
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-
         UserDao userDao = new UserDaoImpl();
         List<User> users = userDao.getUserList();
-        //System.out.println("Send email to the following:");
         for (User recipients : users){
-            //System.out.println(recipients.getEmail() + "  " + recipients.getName());
             sendEmailReminder(recipients.getEmail(), recipients.getName());
         }
-        //sendEmailReminder("russ4stall@gmail.com", "Russtopher");
     }
 
-
     private void sendEmailReminder(String userEmail, String userName){
+        Properties props = new Properties();
 
         WeekCalculator weekCalculator = new WeekCalculator();
 
-        Properties props = new Properties();
+        final String host = "smtp.mandrillapp.com";
+        final String smtpUsername = "russ4stall@gmail.com";
+        final String password = "ACCGYGlUROzLTI7oVQJBsQ";
 
-
-        //props.put("mail.smtp.host", "0.0.0.0");
-        props.put("mail.smtp.host", "192.168.2.41");
-        props.put("mail.smtp.port", "25");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.user", smtpUsername );
+        props.put("mail.smtp.password", password);
 
         Session session = Session.getDefaultInstance(props, null);
 
-        String footer = "\n \n \n \nThis is an automated email. Do not respond to this address";
+        session.setPasswordAuthentication(new URLName("smtp", host, -1, null, smtpUsername, null),
+                new PasswordAuthentication(smtpUsername, password));
 
-        String msgBody = "Hey " + userName + "!<br><br>This email was sent as a reminder.  Head over to <a href='http://forstall.isd-testnet.com/fourscorepicks'>FourScorePicks</a> to make your picks for week "
+        String footer = "\n \n \n \n*This is an automated email. Do not respond to this address";
+
+        String msgBody = "Hey " + userName + "!<br><br>Hope you're having a great week!  If you haven't already done so, head over to <a href='http://fourscorepicks.com'>FourScorePicks</a> and make your picks for week "
                 + weekCalculator.getWeekOfSeason() + ".  The first game is tonight!<br><br>" + footer;
 
         try {
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("noreply@forstall.isd-testnet.com", "Four Score Picks"));
+            msg.setFrom(new InternetAddress("no-reply@fourscorepicks.com", "Four Score Picks"));
             msg.addRecipient(Message.RecipientType.TO,
                     new InternetAddress(userEmail));
-            msg.setSubject("FourScorePicks: Make Your Picks for Week " + weekCalculator.getWeekOfSeason());
+            msg.setSubject("Four Score Picks: Make Your Picks for Week " + weekCalculator.getWeekOfSeason());
             //msg.setText(msgBody);
             msg.setContent(msgBody, "text/html");
             Transport.send(msg);

@@ -45,7 +45,6 @@ public class WebAppContextListener implements ServletContextListener {
         try {
             scheduler = StdSchedulerFactory.getDefaultScheduler();
 
-
             JobDetail emailJobDetail = newJob(EmailPickReminder.class)
                     .withIdentity("job1", "group1")
                     .build();
@@ -53,13 +52,13 @@ public class WebAppContextListener implements ServletContextListener {
             Trigger emailTrigger = newTrigger()
                     .withIdentity("trigger1", "group1")
                     .startNow()
-                    //.withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.MONDAY, 15, 52))
                     .withSchedule(weeklyOnDayAndHourAndMinute(DateBuilder.THURSDAY, 15, 0))
                     .build();
 
             scheduler.scheduleJob(emailJobDetail, emailTrigger);
 
             //todo: create a job for PersistUserWeekScoreTask
+            //todo: create a job for ScrapeWeeklyNFLScoresTask
 
             scheduler.start();
         } catch (SchedulerException e) {
